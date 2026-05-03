@@ -1,0 +1,44 @@
+/* ===== MANAJEMEN-PRODUK SPECIFIC - Tables, Forms, Modals (after common.css) ===== */
+@import url('common.css');
+
+/* ===== Main Content Area (already in common, but override if needed) ===== */
+.main-content-area {
+    padding: 20px;
+    min-height: calc(100vh - 70px);
+}
+
+/* Table Card (enhanced for produk) */
+.table-card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Button Action */
+.btn-action {
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+}
+
+/* Form & Modal Specific */
+.form-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.modal-header { border-bottom: 1px solid #f1f5f9; }
+.modal-footer { border-top: 1px solid #f1f5f9; }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .main-content-area {
+        padding: 15px;
+    }
+}
+

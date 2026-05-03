@@ -1,0 +1,195 @@
+/* ===== COMMON STYLES - Shared across non-Admin pages ===== */
+
+/* Base & Layout */
+body { 
+    background-color: #f4f6f9; 
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper { 
+    display: flex; 
+    width: 100%; 
+    align-items: stretch; 
+}
+
+#sidebar {
+    min-width: 250px; 
+    max-width: 250px;
+    background: #171c2c; 
+    color: #fff;
+    min-height: 100vh;
+}
+
+#sidebar .sidebar-header { 
+    padding: 20px; 
+    text-align: center; 
+}
+
+#sidebar .logo-text { 
+    color: #fff; 
+    font-weight: bold; 
+    font-size: 1.5rem; 
+}
+
+#sidebar ul.components { 
+    padding: 20px 0; 
+    border-bottom: 1px solid #2a3144; 
+}
+
+/* ===== FLEXBOX SIDEBAR MENU STRUCTURE ===== */
+#sidebar ul.components {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Consistent spacing between menu items */
+}
+
+#sidebar ul li a {
+    padding: 15px 25px; 
+    display: flex;
+    align-items: center;  /* Flexbox for consistent alignment */
+    box-sizing: border-box;  /* Prevent box size changes */
+    color: #d1d5db; 
+    text-decoration: none;
+    transition: all 0.3s;
+    /* Fixed height for consistency */
+    line-height: 1;
+}
+
+#sidebar ul li a:hover, 
+#sidebar ul li.active > a {
+    color: #fff; 
+    background: #2a3144; 
+    border-left: 4px solid #006aff;
+}
+
+/* Ensure .active class does NOT add size (no margin/padding changes) */
+#sidebar ul li.active > a {
+    /* Keep same box model as non-active - no extra margin or padding */
+    box-sizing: border-box;
+}
+
+#sidebar ul li a i { 
+    margin-right: 15px; 
+    font-size: 1.1rem; 
+    vertical-align: middle;  /* Icon and text aligned */
+    flex-shrink: 0;  /* Prevent icon from shrinking */
+}
+
+#sidebar .sidebar-label {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    /* Fixed margin-top so not affected by elements above */
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding: 10px 25px;
+    box-sizing: border-box;
+}
+
+/* First sidebar-label should not have top margin */
+.sidebar-menu-wrapper:first-child .sidebar-label {
+    margin-top: 0;
+}
+
+/* Ensure all sidebar text/elements have consistent vertical alignment */
+#sidebar * {
+    vertical-align: middle;
+}
+
+#content { 
+    width: 100%; 
+    background: #f4f6f9; 
+    position: relative;
+}
+
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid #e9ecef !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Main Content */
+.main-content-area, .main-pos-area {
+    padding: 20px;
+    min-height: calc(100vh - 70px);
+}
+
+/* Cards & Tables */
+.table-card, .report-table-card {
+    background: white;
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e9ecef;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.table tbody td {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    vertical-align: middle;
+}
+
+/* Badges Soft */
+.badge-soft-info { background-color: #e0f2fe; color: #0369a1; font-weight: 500; padding: 0.5em 1em; }
+.badge-soft-success { background-color: #d1fae5; color: #065f46; font-weight: 500; padding: 0.5em 1em; }
+.badge-soft-danger { background-color: #fee2e2; color: #991b1b; font-weight: 500; padding: 0.5em 1em; }
+
+.badge-qris { background-color: #d1fae5; color: #065f46; }
+.badge-tunai { background-color: #e0f2fe; color: #0369a1; }
+.badge-success-custom { background-color: #d1fae5; color: #065f46; }
+
+/* Forms & Modals */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    border-color: #e5e7eb;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+
+.modal-content {
+    border-radius: 16px;
+    border: none;
+}
+
+/* Action Buttons */
+.btn-action {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    #sidebar { min-width: 200px; max-width: 200px; }
+}
+

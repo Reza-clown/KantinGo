@@ -1,0 +1,51 @@
+/* ===== LAPORAN SPECIFIC - Report cards, header, badges (after common.css) ===== */
+@import url('common.css');
+
+/* ===== Page Header & Buttons ===== */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.btn-print-export {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* ===== Summary Cards ===== */
+.summary-cards .card {
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.summary-cards .card.border-start-primary { border-left-color: var(--bs-primary) !important; }
+.summary-cards .card.border-start-success { border-left-color: var(--bs-success) !important; }
+.summary-cards .card.border-start-info { border-left-color: var(--bs-info) !important; }
+
+.summary-cards .card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Report Table Card */
+.report-table-card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Badges (enhanced, common has base) */
+.badge-qris { padding: 0.5em 1em; }
+.badge-tunai { padding: 0.5em 1em; }
+.badge-success-custom { padding: 0.5em 1em; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header { 
+        flex-direction: column !important; 
+        gap: 1rem; 
+        align-items: stretch !important; 
+    }
+    .btn-print-export { width: 100%; }
+}
+
