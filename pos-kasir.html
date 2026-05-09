@@ -1,306 +1,397 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="pos-kasir.css">
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KantinGO - POS Kasir Modern</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+    }
 
-    <div class="wrapper">
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <span class="logo-text">KantinGO</span>
-            </div>
-<ul class="components list-unstyled">
-                <div class="sidebar-menu-wrapper">
-                    <li class="sidebar-label px-4 text-muted small text-uppercase">Owner</li>
-                    <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                    <li><a href="laporan.html"><i class="bi bi-file-earmark-bar-graph"></i> Laporan</a></li>
-                    <li><a href="manajemen-produk.html"><i class="bi bi-basket"></i> Produk/Menu</a></li>
-                </div>
-                <div class="sidebar-menu-wrapper">
-                    <li class="sidebar-label px-4 text-muted small text-uppercase">Operasional</li>
-                    <li class="active"><a href="#"><i class="bi bi-calculator"></i> POS Kasir</a></li>
-                    <li><a href="#"><i class="bi bi-power"></i> Tutup Kasir</a></li>
-                </div>
-            </ul>
-        </nav>
+    /* Top Navigation Styling */
+    .navbar-main {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 border-bottom shadow-sm">
-                <div class="container-fluid p-0">
-                    <span class="fw-bold fs-5 text-dark">Point of Sale (POS)</span>
-                    <div class="ms-auto d-flex align-items-center">
-                        <span class="me-3 text-muted">Kasir: <strong class="text-dark">Andi</strong></span>
-                        <div class="dropdown">
-                            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                                <span class="bg-primary-subtle text-primary rounded-circle px-2 py-1 small me-2">AN</span>
-                                <strong>Andi N.</strong>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow">
-                                <li><a class="dropdown-item px-3 py-2 text-dark text-decoration-none" href="#">Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none !important;
+    }
 
-            <div class="container-fluid p-0 main-pos-area">
-                <div class="row g-0 h-100">
-                    
-                    <div class="col-12 h-100">
-                        <div class="menu-scroll-area">
-                            
-                            <div class="row category-filter mb-4">
-                                <div class="col">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-                                        <input type="text" class="form-control border-start-0" placeholder="Cari nama makanan...">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <select class="form-select rounded-pill">
-                                        <option selected>Kategori (Semua)</option>
-                                        <option value="1">Makanan Berat</option>
-                                        <option value="2">Minuman</option>
-                                        <option value="3">Snack</option>
-                                    </select>
-                                </div>
-                            </div>
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
 
-                            <div class="row g-3">
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Nasi Goreng Spesial</p>
-                                            <p class="menu-vendor">Campus Cafe</p>
-                                        </div>
-                                        <p class="menu-price">15.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Mie Ayam Baso</p>
-                                            <p class="menu-vendor">Kantin Bu Siti</p>
-                                        </div>
-                                        <p class="menu-price">18.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Es Teh Manis</p>
-                                            <p class="menu-vendor">Snack Corner</p>
-                                        </div>
-                                        <p class="menu-price">5.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Ayam Penyet + Teh</p>
-                                            <p class="menu-vendor">Kantin Bu Siti</p>
-                                        </div>
-                                        <p class="menu-price">23.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Kopi Latte</p>
-                                            <p class="menu-vendor">Snack Corner</p>
-                                        </div>
-                                        <p class="menu-price">12.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Nasi Campur</p>
-                                            <p class="menu-vendor">Campus Cafe</p>
-                                        </div>
-                                        <p class="menu-price">20.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Bakso Jumbo</p>
-                                            <p class="menu-vendor">Kantin Bu Siti</p>
-                                        </div>
-                                        <p class="menu-price">17.000</p>
-                                    </button>
-                                </div>
-                                <div class="col-6 col-md-4 col-xl-3">
-                                    <button class="btn btn-menu-item w-100">
-                                        <div>
-                                            <p class="menu-title">Kentang Goreng</p>
-                                            <p class="menu-vendor">Snack Corner</p>
-                                        </div>
-                                        <p class="menu-price">10.000</p>
-                                    </button>
-                                </div>
-                            </div>
+    .nav-tabs-custom {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-                        </div>
-                    </div>
+    .nav-tabs-custom a {
+      text-decoration: none;
+      color: #64748b;
+      font-weight: 500;
+      padding: 1.5rem 0;
+      display: block;
+      position: relative;
+      transition: color 0.2s;
+    }
 
-                </div>
-            </div>
+    .nav-tabs-custom a.active {
+      color: #0d6efd;
+    }
 
+    .nav-tabs-custom a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #0d6efd;
+    }
+
+    /* Product Card Styling */
+    .product-card {
+      background: white;
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-img-container {
+      position: relative;
+      padding-top: 75%;
+      /* 4:3 Aspect Ratio */
+      background: #f1f5f9;
+    }
+
+    .product-img-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stock-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .btn-add-cart {
+      border-radius: 12px;
+      padding: 10px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .cart-dot {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 10px;
+      height: 10px;
+      border: 2px solid white;
+    }
+
+    /* Modal Customization */
+    .modal-content {
+      border-radius: 24px;
+      border: none;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    /* Permanent Cart Sidebar (Desktop) */
+    .cart-sidebar {
+      background: white;
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      height: calc(100vh - 120px);
+      position: sticky;
+      top: 100px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .cart-items-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .search-bar {
+      max-width: 600px;
+      /* atau sesuai kebutuhan */
+      margin: 0 auto;
+      /* biar tetap center */
+    }
+
+
+    /* Sticky Bottom Cart (Mobile) */
+    @media (max-width: 991.98px) {
+      .cart-fixed-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        padding: 16px 24px;
+        border-radius: 24px 24px 0 0;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .main-pos-content {
+        padding-bottom: 100px;
+      }
+    }
+
+    .btn-checkout {
+      background-color: #10b981;
+      /* Hijau Sukses */
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .btn-checkout:hover {
+      background-color: #059669;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Navigation -->
+  <nav class="navbar-main">
+    <div class="container-fluid px-4 py-0">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-5">
+          <a href="dashboard.html" class="navbar-logo">
+            <div class="logo-icon"><i class="bi bi-shop-window"></i></div>
+            <div class="fw-bold fs-4 text-dark mb-0">Kantin<span class="text-primary">GO</span></div>
+          </a>
+          <ul class="nav-tabs-custom">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="pos-kasir.html" class="active">POS Kasir</a></li>
+            <li><a href="manajemen-produk.html">Manajemen Produk</a></li>
+          </ul>
         </div>
+        <div class="d-flex gap-3">
+          <button class="btn btn-light rounded-circle"><i class="bi bi-bell"></i></button>
+          <div class="btn btn-primary rounded-pill px-4 d-none d-md-block">Owner Account</div>
+        </div>
+
+      </div>
     </div>
+  </nav>
 
-    <!-- Floating Cart Button -->
-    <button class="btn-floating-cart" id="cartToggleBtn" aria-label="Buka Keranjang">
-        <i class="bi bi-cart3 fs-4"></i>
-        <span class="cart-badge" id="cartBadge">2</span>
-    </button>
+  <main class="container-fluid px-4 py-4">
+    <div class="row g-4">
+      <!-- Kolom Produk (Grid) -->
+      <div class="col-lg-9 main-pos-content">
+        <!-- Search Bar -->
+        <div class="row mb-3">
+          <div class="col-lg-12">
+            <div class="input-group shadow-sm rounded-pill overflow-hidden border-0">
+              <span class="input-group-text bg-white border-0 ps-4">
+                <i class="bi bi-search text-muted"></i>
+              </span>
+              <input type="text" class="form-control border-0 py-3" placeholder="Cari menu favorit di sini...">
+            </div>
+          </div>
+        </div>
 
-    <!-- Cart Overlay -->
-    <div id="cartOverlay" class="cart-overlay"></div>
 
-    <!-- Slide-in Cart Panel -->
-    <div id="cartPanel" class="cart-panel">
-        <div class="cart-panel-header">
-            <h5 class="m-0 fw-bold"><i class="bi bi-cart3 me-2"></i>Keranjang Pesanan</h5>
-            <button class="btn btn-link text-dark p-0" id="cartCloseBtn" aria-label="Tutup Keranjang">
-                <i class="bi bi-x-lg fs-5"></i>
+        <!-- Filter Categories (Sekarang di bawah Search) -->
+        <div class="d-flex gap-2 overflow-x-auto pb-3 mb-4">
+          <button class="btn btn-primary rounded-pill px-4">Semua Menu</button>
+          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Makanan Berat</button>
+          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Minuman Dingin</button>
+          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Camilan / Snack</button>
+        </div>
+
+        <!-- Template Produk (disusun 2 baris) -->
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3">
+
+          <div class="col">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img src="https://images.unsplash.com/photo-1512058560566-4334670a1c10?w=400" alt="Nasi Goreng">
+                <span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i> Stok:
+                  42</span>
+              </div>
+              <div class="p-3 text-center">
+                <h6 class="fw-bold mb-1 text-truncate">Nasi Goreng Spesial</h6>
+                <p class="text-primary fw-bold mb-3">Rp 15.000</p>
+                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
+                  Tambah</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Salad">
+                <span class="stock-badge bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill me-1"></i> Sisa
+                  5</span>
+              </div>
+              <div class="p-3 text-center">
+                <h6 class="fw-bold mb-1 text-truncate">Ayam Geprek Bento</h6>
+                <p class="text-primary fw-bold mb-3">Rp 23.000</p>
+                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
+                  Tambah</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="product-card opacity-75">
+              <div class="product-img-container">
+                <img src="https://images.unsplash.com/photo-1544145945-f904253d0c71?w=400" alt="Kopi">
+                <span class="stock-badge bg-danger text-white"><i class="bi bi-x-circle-fill me-1"></i> Habis</span>
+              </div>
+              <div class="p-3 text-center">
+                <h6 class="fw-bold mb-1 text-truncate">Es Kopi Gula Aren</h6>
+                <p class="text-primary fw-bold mb-3">Rp 12.000</p>
+                <button class="btn btn-secondary btn-add-cart w-100" disabled>Habis</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400" alt="Mie">
+                <span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i> Stok:
+                  18</span>
+              </div>
+              <div class="p-3 text-center">
+                <h6 class="fw-bold mb-1 text-truncate">Mie Ayam Spesial</h6>
+                <p class="text-primary fw-bold mb-3">Rp 17.000</p>
+                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
+                  Tambah</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- Kolom Keranjang (Sidebar Permanen di Desktop) -->
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="cart-sidebar">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="fw-bold m-0"><i class="bi bi-cart3 me-2"></i>Pesanan</h5>
+            <button class="btn btn-sm btn-light rounded-pill text-danger">Kosongkan</button>
+          </div>
+
+          <div class="cart-items-list">
+            <div class="cart-item">
+              <div class="flex-grow-1">
+                <div class="fw-semibold">Nasi Goreng Spesial</div>
+                <div class="small text-muted">Rp 15.000 x 2</div>
+              </div>
+              <div class="fw-bold text-dark">Rp 30.000</div>
+            </div>
+            <div class="cart-item">
+              <div class="flex-grow-1">
+                <div class="fw-semibold">Es Teh Manis</div>
+                <div class="small text-muted">Rp 5.000 x 1</div>
+              </div>
+              <div class="fw-bold text-dark">Rp 5.000</div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-top">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Subtotal</span>
+              <span class="fw-bold">Rp 35.000</span>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <span class="h5 fw-bold m-0">Total Harga</span>
+              <span class="h5 fw-bold text-primary m-0">Rp 35.000</span>
+            </div>
+            <button class="btn-checkout w-100">
+              Checkout Sekarang <i class="bi bi-arrow-right ms-2"></i>
             </button>
-        </div>
-
-        <div class="cart-panel-body">
-            <div class="cart-item">
-                <div>
-                    <p class="cart-item-title">Nasi Goreng Spesial</p>
-                    <p class="cart-item-vendor">Campus Cafe</p>
-                    <div class="cart-item-qty-control mt-1">
-                        <button class="qty-btn"><i class="bi bi-dash-lg"></i></button>
-                        <span class="qty-value">2</span>
-                        <button class="qty-btn"><i class="bi bi-plus-lg"></i></button>
-                    </div>
-                </div>
-                <p class="cart-item-subtotal">30.000</p>
-            </div>
-            <div class="cart-item">
-                <div>
-                    <p class="cart-item-title">Es Teh Manis</p>
-                    <p class="cart-item-vendor">Snack Corner</p>
-                    <div class="cart-item-qty-control mt-1">
-                        <button class="qty-btn"><i class="bi bi-dash-lg"></i></button>
-                        <span class="qty-value">1</span>
-                        <button class="qty-btn"><i class="bi bi-plus-lg"></i></button>
-                    </div>
-                </div>
-                <p class="cart-item-subtotal">5.000</p>
-            </div>
-        </div>
-
-        <div class="cart-panel-footer">
-            <div class="total-display p-3 bg-white rounded-3 shadow-sm mb-4">
-                <span class="total-label fw-bold text-uppercase text-muted">Total Bayar</span>
-                <span class="total-value fw-bolder">Rp 35.000</span>
-            </div>
-            <div class="row g-3">
-                <div class="col-6">
-                    <button class="btn btn-outline-dark w-100 py-3 rounded-3" data-bs-toggle="modal" data-bs-target="#paymentModalTunai">
-                        <i class="bi bi-cash me-2"></i> Tunai
-                    </button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-primary w-100 py-3 rounded-3" data-bs-toggle="modal" data-bs-target="#paymentModalQris">
-                        <i class="bi bi-qr-code me-2"></i> QRIS
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment Modal: Tunai -->
-    <div class="modal fade" id="paymentModalTunai" tabindex="-1" aria-labelledby="paymentModalTunaiLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow" style="border-radius: 16px;">
-          <div class="modal-header border-0 pb-0">
-            <h5 class="modal-title fw-bold" id="paymentModalTunaiLabel"><i class="bi bi-cash me-2 text-success"></i>Pembayaran Tunai</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="text-center mb-4">
-              <p class="text-muted mb-1">Total yang harus dibayar</p>
-              <h2 class="fw-bold text-primary">Rp 35.000</h2>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium">Nominal Diterima</label>
-              <input type="number" class="form-control form-control-lg" placeholder="Masukkan jumlah uang">
-            </div>
-          </div>
-          <div class="modal-footer border-0 pt-0">
-            <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-success rounded-pill px-4">Proses Bayar</button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Payment Modal: QRIS -->
-    <div class="modal fade" id="paymentModalQris" tabindex="-1" aria-labelledby="paymentModalQrisLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow" style="border-radius: 16px;">
-          <div class="modal-header border-0 pb-0">
-            <h5 class="modal-title fw-bold" id="paymentModalQrisLabel"><i class="bi bi-qr-code me-2 text-primary"></i>Pembayaran QRIS</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Panel Keranjang Bawah (Hanya muncul di Mobile) -->
+      <div class="d-lg-none cart-fixed-bottom">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="small text-muted">3 item terpilih</div>
+            <div class="h5 fw-bold text-primary mb-0">Rp 35.000</div>
           </div>
-          <div class="modal-body text-center">
-            <p class="text-muted mb-3">Scan kode QR berikut menggunakan aplikasi e-wallet</p>
-            <div class="bg-light p-4 rounded-4 d-inline-block mb-3">
-              <i class="bi bi-qr-code-scan" style="font-size: 8rem; color: #333;"></i>
-            </div>
-            <h5 class="fw-bold">Rp 35.000</h5>
-          </div>
-          <div class="modal-footer border-0 pt-0 justify-content-center">
-            <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-primary rounded-pill px-4">Cek Status</button>
-          </div>
+          <button class="btn btn-success rounded-pill px-4 py-2 fw-bold">
+            Checkout <i class="bi bi-arrow-right ms-1"></i>
+          </button>
         </div>
       </div>
     </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Toggle Cart Panel
-        const cartToggleBtn = document.getElementById('cartToggleBtn');
-        const cartCloseBtn = document.getElementById('cartCloseBtn');
-        const cartPanel = document.getElementById('cartPanel');
-        const cartOverlay = document.getElementById('cartOverlay');
-
-        function openCart() {
-            cartPanel.classList.add('show');
-            cartOverlay.classList.add('show');
-        }
-
-        function closeCart() {
-            cartPanel.classList.remove('show');
-            cartOverlay.classList.remove('show');
-        }
-
-        cartToggleBtn.addEventListener('click', openCart);
-        cartCloseBtn.addEventListener('click', closeCart);
-        cartOverlay.addEventListener('click', closeCart);
-
-        // Close on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeCart();
-            }
-        });
-    </script>
-  </body>
 </html>
-
