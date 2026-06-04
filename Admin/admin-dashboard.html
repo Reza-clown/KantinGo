@@ -1,198 +1,338 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KantinGO - Admin Dashboard</title>
-    <!-- Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <link rel="stylesheet" href="admin-dashboard.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KantinGO - Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../global.css">
 </head>
-
 <body>
 
-    <!-- Sidebar -->
-    <nav id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <a href="dashboard.html" class="navbar-logo">
-                <div class="logo-icon"><i class="bi bi-shop-window"></i></div>
-                <div class="fw-bold fs-4 text-light mb-0">Kantin<span class="text-primary">GO</span></div>
-            </a>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="active"><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
-            </li>
-            <li><a href="manajemen-produk.html"><i class="bi bi-basket"></i> Manajemen Produk</a></li>
-            <li><a href="manajemen-dashboard.html"><i class="bi bi-people"></i> Manajemen Karyawan</a></li>
-            <li><a href="report.html"><i class="bi bi-receipt"></i> Laporan Transaksi</a></li>
-            <li><a href="pengaturan-sistem.html"><i class="bi bi-gear"></i> Pengaturan Sistem</a></li>
-        </ul>
-    </nav>
-
-    <!-- Mobile Overlay -->
-    <div id="sidebarOverlay" class="sidebar-overlay d-lg-none"></div>
-
-    <!-- Top Navbar -->
-    <nav class="navbar top-navbar fixed-top px-4">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center gap-4">
-                <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle">
-                    <i class="bi bi-list fs-4"></i>
-                </button>
-                <span class="navbar-brand d-none d-lg-block m-0">Admin Panel</span>
-                <!-- Main Navigation Links -->
-                <div class="d-none d-xl-flex gap-3 ms-4 border-start ps-4">
-                    <a href="../dashboard.html" class="text-decoration-none text-muted fw-medium small">Dashboard
-                        Owner</a>
-                    <a href="../pos-kasir.html" class="text-decoration-none text-muted fw-medium small">POS Kasir</a>
-                    <a href="../manajemen-produk.html" class="text-decoration-none text-muted fw-medium small">Manajemen
-                        Produk</a>
-                    <a href="admin-dashboard.html" class="text-decoration-none text-primary fw-bold small">Admin</a>
-                </div>
-            </div>
-            <div class="ms-auto d-flex align-items-center gap-3">
-                <div class="dropdown">
-                    <button
-                        class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle"
-                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="avatar-circle">AD</div>
-                        <span class="d-none d-md-block fw-medium">Admin User</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>
-                                Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="main-content">
-
-        <div class="container-fluid py-4 px-5">
-
-            <div class="d-flex justify-content-between align-items-center mb-5">
-                <div>
-                    <h2 class="fw-bold m-0">Admin Dashboard</h2>
-                    <p class="text-muted m-0">Ringkasan sistem manajemen KantinGO hari ini.</p>
-                </div>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-link text-decoration-none text-dark fw-medium">Export</button>
-                    <button class="btn btn-primary fw-medium px-4">Generate Report</button>
-                </div>
-            </div>
-
-            <div class="row g-4 mb-5">
-
-                <div class="col-xl-4 col-md-6">
-                    <div class="card card-stat shadow-sm p-4 h-100">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div class="icon-box bg-primary-subtle text-primary">
-                                <i class="bi bi-box-seam"></i>
-                            </div>
-                            <i class="bi bi-three-dots-vertical text-muted"></i>
-                        </div>
-                        <p class="text-muted mt-3 mb-1 fw-medium small text-uppercase">Total Produk</p>
-                        <h2 class="fw-bold m-0 text-primary">54</h2>
-                        <small class="text-muted">Item menu tersedia</small>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-md-6">
-                    <div class="card card-stat shadow-sm p-4 h-100">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div class="icon-box bg-success-subtle text-success">
-                                <i class="bi bi-person-badge"></i>
-                            </div>
-                            <i class="bi bi-three-dots-vertical text-muted"></i>
-                        </div>
-                        <p class="text-muted mt-3 mb-1 fw-medium small text-uppercase">Total Kasir</p>
-                        <h2 class="fw-bold m-0 text-success">12</h2>
-                        <small class="text-muted">Staf aktif terdaftar</small>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-md-12">
-                    <div class="card card-stat shadow-sm p-4 h-100">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div class="icon-box bg-danger-subtle text-danger">
-                                <i class="bi bi-cart-check"></i>
-                            </div>
-                            <i class="bi bi-three-dots-vertical text-muted"></i>
-                        </div>
-                        <p class="text-muted mt-3 mb-1 fw-medium small text-uppercase">Transaksi Hari Ini</p>
-                        <h2 class="fw-bold m-0 text-danger">142</h2>
-                        <small class="text-danger fw-medium">+8.3% dari kemarin</small>
-                    </div>
-                </div>
-
-            </div>
-            <div class="card table-container shadow-sm">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="fw-bold m-0">Ringkasan Transaksi Terbaru</h5>
-                    <button class="btn btn-sm btn-light text-primary fw-semibold">Lihat Semua</button>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">Waktu</th>
-                                <th scope="col">Kasir</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Jumlah</th>
-                                <th scope="col">Total Harga</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-muted">14:32</td>
-                                <td class="fw-semibold">Budi Santoso</td>
-                                <td>Nasi Goreng Spesial</td>
-                                <td>2</td>
-                                <td class="fw-bold text-dark">Rp 30.000</td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted">14:28</td>
-                                <td class="fw-semibold">Siti Aminah</td>
-                                <td>Es Teh Manis, Ayam Geprek</td>
-                                <td>4</td>
-                                <td class="fw-bold text-dark">Rp 28.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
+  <!-- Sidebar -->
+  <nav id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <a href="../dashboard.html" class="navbar-logo">
+        <div class="logo-icon"><i class="bi bi-shop-window"></i></div>
+        <div class="fw-bold fs-4 text-light mb-0">Kantin<span class="text-primary">GO</span></div>
+      </a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.toggle('show');
-            document.getElementById('sidebarOverlay').classList.toggle('show');
-        });
-        document.getElementById('sidebarOverlay').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.remove('show');
-            document.getElementById('sidebarOverlay').classList.remove('show');
-        });
-    </script>
-</body>
+    <ul class="sidebar-nav">
+      <li class="active"><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a></li>
+      <li><a href="manajemen-produk.html"><i class="bi bi-basket"></i> Manajemen Produk</a></li>
+      <li><a href="manajemen-dashboard.html"><i class="bi bi-people"></i> Manajemen Karyawan</a></li>
+      <li><a href="report.html"><i class="bi bi-receipt"></i> Laporan Transaksi</a></li>
+      <li><a href="pengaturan-sistem.html"><i class="bi bi-gear"></i> Pengaturan Sistem</a></li>
+      <li class="mt-2 pt-2" style="border-top:1px solid rgba(255,255,255,.1)">
+        <a href="../pos-kasir.html"><i class="bi bi-cart3"></i> POS Kasir</a>
+      </li>
+      <li><a href="../dashboard.html"><i class="bi bi-house"></i> Dashboard Kasir</a></li>
+    </ul>
+  </nav>
+  <div id="sidebarOverlay" class="sidebar-overlay d-lg-none"></div>
 
+  <!-- Top Navbar -->
+  <nav class="navbar top-navbar fixed-top px-4">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center gap-4">
+        <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle"><i class="bi bi-list fs-4"></i></button>
+        <span class="navbar-brand d-none d-lg-block m-0">Admin Panel</span>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <!-- Bulan filter -->
+        <div class="d-none d-md-flex align-items-center gap-2">
+          <select class="form-select form-select-sm" id="filterMonth" style="width:120px">
+            <option value="1">Januari</option><option value="2">Februari</option>
+            <option value="3">Maret</option><option value="4">April</option>
+            <option value="5">Mei</option><option value="6">Juni</option>
+            <option value="7">Juli</option><option value="8">Agustus</option>
+            <option value="9">September</option><option value="10">Oktober</option>
+            <option value="11">November</option><option value="12">Desember</option>
+          </select>
+          <select class="form-select form-select-sm" id="filterYear" style="width:90px"></select>
+          <button class="btn btn-sm btn-primary" id="btnLoadDashboard"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle"
+            type="button" data-bs-toggle="dropdown">
+            <div class="avatar-circle" id="navAvatar">OW</div>
+            <span class="d-none d-md-block fw-medium" id="navName">Owner</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container-fluid py-4 px-5">
+
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+          <h2 class="fw-bold m-0">Admin Dashboard</h2>
+          <p class="text-muted m-0" id="periodeLabel">Memuat data...</p>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="report.html" class="btn btn-outline-secondary fw-medium">Laporan Lengkap</a>
+          <a href="report.html" class="btn btn-primary fw-medium px-4">Generate Report</a>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="row g-4 mb-5">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stat shadow-sm p-4 h-100">
+            <div class="icon-box bg-success-subtle text-success mb-3"><i class="bi bi-currency-dollar"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Omzet Bulan Ini</p>
+            <h2 class="fw-bold m-0 text-success" id="statOmzet">—</h2>
+            <small class="text-muted">Total pendapatan bulan berjalan</small>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stat shadow-sm p-4 h-100">
+            <div class="icon-box bg-primary-subtle text-primary mb-3"><i class="bi bi-cart-check"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Jumlah Transaksi</p>
+            <h2 class="fw-bold m-0 text-primary" id="statTransaksi">—</h2>
+            <small class="text-muted">Transaksi lunas bulan ini</small>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stat shadow-sm p-4 h-100">
+            <div class="icon-box bg-warning-subtle text-warning mb-3"><i class="bi bi-box-seam"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Total Produk Aktif</p>
+            <h2 class="fw-bold m-0 text-warning" id="statProduk">—</h2>
+            <small class="text-muted">Item menu tersedia</small>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stat shadow-sm p-4 h-100">
+            <div class="icon-box bg-danger-subtle text-danger mb-3"><i class="bi bi-people"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Total Karyawan</p>
+            <h2 class="fw-bold m-0 text-danger" id="statKaryawan">—</h2>
+            <small class="text-muted">Staf aktif terdaftar</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <!-- Produk Paling Laris -->
+        <div class="col-xl-6">
+          <div class="card shadow-sm p-4 h-100">
+            <h5 class="fw-bold mb-4"><i class="bi bi-trophy-fill text-warning me-2"></i>Produk Paling Laris</h5>
+            <div id="topProductsContainer">
+              <div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat...</div>
+            </div>
+          </div>
+        </div>
+        <!-- Produk Kurang Laris -->
+        <div class="col-xl-6">
+          <div class="card shadow-sm p-4 h-100">
+            <h5 class="fw-bold mb-4"><i class="bi bi-arrow-down-circle-fill text-secondary me-2"></i>Produk Kurang Laris</h5>
+            <div id="bottomProductsContainer">
+              <div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel Transaksi Terbaru -->
+      <div class="card table-container shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="fw-bold m-0">Transaksi Terbaru</h5>
+          <a href="report.html" class="btn btn-sm btn-light text-primary fw-semibold">Lihat Semua</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Kode Order</th>
+                <th>Waktu</th>
+                <th>Kasir</th>
+                <th>Total</th>
+                <th>Metode</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersBody">
+              <tr><td colspan="6" class="text-center text-muted py-4">Memuat transaksi...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API = 'http://127.0.0.1:3001/api';
+
+    // ── Auth helpers ──────────────────────────────────────────────────────
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    function showToast(msg, type = 'success') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el).show();
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, { headers: authHeaders(), ...opts });
+      if (res.status === 401) { localStorage.clear(); location.href = '../login.html'; }
+      return res.json();
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken() || user.role !== 'owner') { location.href = '../login.html'; }
+
+    document.getElementById('navName').textContent   = user.full_name || 'Owner';
+    document.getElementById('navAvatar').textContent = (user.full_name || 'OW').substring(0, 2).toUpperCase();
+    document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = '../login.html'; });
+
+    // Sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('show');
+      document.getElementById('sidebarOverlay').classList.toggle('show');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('show');
+      document.getElementById('sidebarOverlay').classList.remove('show');
+    });
+
+    // ── Populate year filter ───────────────────────────────────────────────
+    const now = new Date();
+    const yearSel = document.getElementById('filterYear');
+    for (let y = now.getFullYear(); y >= now.getFullYear() - 3; y--) {
+      const o = document.createElement('option');
+      o.value = y; o.textContent = y;
+      yearSel.appendChild(o);
+    }
+    document.getElementById('filterMonth').value = now.getMonth() + 1;
+
+    document.getElementById('btnLoadDashboard').addEventListener('click', loadAll);
+
+    function formatRp(n) {
+      return 'Rp ' + Number(n).toLocaleString('id-ID');
+    }
+
+    // ── Load all data ─────────────────────────────────────────────────────
+    async function loadAll() {
+      const month = document.getElementById('filterMonth').value;
+      const year  = document.getElementById('filterYear').value;
+      document.getElementById('periodeLabel').textContent = `Periode: ${document.getElementById('filterMonth').options[month-1].text} ${year}`;
+
+      await Promise.all([
+        loadOwnerDashboard(month, year),
+        loadExtraStats(),
+        loadRecentOrders(month, year),
+      ]);
+    }
+
+    async function loadOwnerDashboard(month, year) {
+      try {
+        const data = await apiFetch(`/dashboard/owner?month=${month}&year=${year}`);
+        if (!data.data) return;
+        const d = data.data;
+
+        document.getElementById('statOmzet').textContent    = formatRp(d.omzet);
+        document.getElementById('statTransaksi').textContent = d.jumlah_transaksi;
+
+        // Produk paling laris
+        const topEl = document.getElementById('topProductsContainer');
+        if (d.produk_paling_laris.length === 0) {
+          topEl.innerHTML = '<p class="text-muted text-center py-3">Belum ada data penjualan</p>';
+        } else {
+          topEl.innerHTML = d.produk_paling_laris.map((p, i) => `
+            <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
+              <div class="d-flex align-items-center gap-3">
+                <span class="fw-bold text-muted" style="width:24px">${i+1}</span>
+                <div>
+                  <div class="fw-semibold">${p.nama}</div>
+                  <small class="text-muted">${formatRp(p.total_pendapatan)}</small>
+                </div>
+              </div>
+              <span class="badge bg-success-subtle text-success rounded-pill px-3">${p.total_terjual} terjual</span>
+            </div>`).join('');
+        }
+
+        // Produk kurang laris
+        const botEl = document.getElementById('bottomProductsContainer');
+        if (d.produk_kurang_laris.length === 0) {
+          botEl.innerHTML = '<p class="text-muted text-center py-3">Belum ada data penjualan</p>';
+        } else {
+          botEl.innerHTML = d.produk_kurang_laris.map((p, i) => `
+            <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
+              <div class="d-flex align-items-center gap-3">
+                <span class="fw-bold text-muted" style="width:24px">${i+1}</span>
+                <div>
+                  <div class="fw-semibold">${p.nama}</div>
+                  <small class="text-muted">${formatRp(p.total_pendapatan)}</small>
+                </div>
+              </div>
+              <span class="badge bg-secondary-subtle text-secondary rounded-pill px-3">${p.total_terjual} terjual</span>
+            </div>`).join('');
+        }
+      } catch(e) { console.error(e); }
+    }
+
+    async function loadExtraStats() {
+      try {
+        const [produkRes, userRes] = await Promise.all([
+          apiFetch('/products?limit=1'),
+          apiFetch('/users'),
+        ]);
+        document.getElementById('statProduk').textContent   = produkRes.meta?.total ?? '—';
+        document.getElementById('statKaryawan').textContent = userRes.data?.length ?? '—';
+      } catch(e) { console.error(e); }
+    }
+
+    async function loadRecentOrders(month, year) {
+      try {
+        const from = `${year}-${String(month).padStart(2,'0')}-01`;
+        const data = await apiFetch(`/orders?limit=10&from=${from}`);
+        const tbody = document.getElementById('recentOrdersBody');
+        if (!data.data || data.data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Belum ada transaksi</td></tr>';
+          return;
+        }
+        const statusBadge = { paid:'success', unpaid:'warning', cancelled:'danger' };
+        tbody.innerHTML = data.data.map(o => `
+          <tr>
+            <td class="fw-medium">${o.order_code}</td>
+            <td class="text-muted small">${new Date(o.created_at).toLocaleString('id-ID')}</td>
+            <td>${o.kasir?.full_name ?? '-'}</td>
+            <td class="fw-bold">${formatRp(o.total)}</td>
+            <td><span class="badge bg-light text-dark border rounded-pill">${o.payment_method}</span></td>
+            <td><span class="badge bg-${statusBadge[o.order_status]}-subtle text-${statusBadge[o.order_status]} rounded-pill">${o.order_status}</span></td>
+          </tr>`).join('');
+      } catch(e) { console.error(e); }
+    }
+
+    loadAll();
+  </script>
+</body>
 </html>

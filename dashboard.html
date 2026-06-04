@@ -1,128 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KantinGO - Dashboard Modern</title>
+  <title>KantinGO - Dashboard Kasir</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: #f8fafc;
-      font-family: 'Inter', sans-serif;
-      color: #1e293b;
-    }
-
-    /* Top Navigation Styling */
-    .navbar-main {
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none !important;
-    }
-
-    .logo-icon {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, #0d6efd, #0dcaf0);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-    }
-
-    .nav-tabs-custom {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-tabs-custom a {
-      text-decoration: none;
-      color: #64748b;
-      font-weight: 500;
-      padding: 1.5rem 0;
-      display: block;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    .nav-tabs-custom a.active {
-      color: #0d6efd;
-    }
-
-    .nav-tabs-custom a.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: #0d6efd;
-    }
-
-    /* Dashboard Components */
-    .cardx {
-      background: white;
-      border: none;
-      border-radius: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-
-    .revenue-large {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #0d6efd;
-      letter-spacing: -1px;
-    }
-
-    .stat-label {
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    .stock-indicator {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #f8fafc;
-      margin-bottom: 8px;
-    }
-
-    .indicator-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .bg-out { background-color: #ef4444; }
-    .bg-low { background-color: #f59e0b; }
-    .bg-sufficient { background-color: #10b981; }
-  </style>
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
 
@@ -136,14 +23,28 @@
             <div class="fw-bold fs-4 text-dark mb-0">Kantin<span class="text-primary">GO</span></div>
           </a>
           <ul class="nav-tabs-custom">
-            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
             <li><a href="pos-kasir.html">POS Kasir</a></li>
             <li><a href="manajemen-produk.html">Manajemen Produk</a></li>
           </ul>
         </div>
-        <div class="d-flex gap-3">
-          <button class="btn btn-light rounded-circle"><i class="bi bi-bell"></i></button>
-          <div class="btn btn-primary rounded-pill px-4 d-none d-md-block">Owner Account</div>
+        <div class="d-flex gap-3 align-items-center">
+          <a href="Admin/admin-dashboard.html" id="adminLink" class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0" style="background:#1a1a2e">
+            <i class="bi bi-shield-lock-fill text-primary"></i><span class="small fw-bold">Panel Admin</span>
+          </a>
+          <div class="dropdown">
+            <button class="btn btn-primary rounded-pill px-4 dropdown-toggle" data-bs-toggle="dropdown">
+              <span id="navUserName">Kasir</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="px-3 py-2 border-bottom">
+                <div class="fw-semibold small" id="navFullName"></div>
+                <div class="text-muted small" id="navRole"></div>
+              </li>
+              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
+              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -151,32 +52,33 @@
 
   <main class="container py-5">
     <div class="row g-4">
-      
+
       <!-- Kolom Kiri: Omzet & Transaksi -->
       <div class="col-lg-6">
         <div class="cardx p-4 h-100">
           <div class="mb-5">
-            <div class="stat-label mb-1">Omzet Harian</div>
-            <div class="revenue-large">Rp 4.250.000</div>
-            <div class="text-success fw-semibold"><i class="bi bi-arrow-up-right me-1"></i>12.5% dari kemarin</div>
+            <div class="stat-label mb-1">Omzet Hari Ini</div>
+            <div class="revenue-large" id="omzetHarian">Rp —</div>
+            <div class="text-muted small">Total pendapatan yang sudah lunas hari ini</div>
           </div>
-          
           <hr class="my-4 opacity-25">
-          
           <div>
-            <div class="stat-label mb-1">Total Transaksi</div>
-            <div class="h2 fw-bold mb-0">156</div>
+            <div class="stat-label mb-1">Total Transaksi Hari Ini</div>
+            <div class="h2 fw-bold mb-0" id="totalTransaksi">—</div>
             <div class="text-muted small">Transaksi berhasil diproses hari ini</div>
           </div>
-
+          <div class="mt-3">
+            <div class="stat-label mb-1">Transaksi Saya</div>
+            <div class="h4 fw-bold mb-0 text-primary" id="transaksiSaya">—</div>
+            <div class="text-muted small">Transaksi yang Anda buat hari ini</div>
+          </div>
           <div class="mt-5 d-flex gap-2">
-            <button class="btn btn-outline-primary rounded-pill px-4">Laporan Detail</button>
-            <button class="btn btn-primary rounded-pill px-4">Input Transaksi</button>
+            <a href="pos-kasir.html" class="btn btn-primary rounded-pill px-4">Input Transaksi</a>
           </div>
         </div>
       </div>
 
-      <!-- Kolom Kanan: Panel Stok Barang -->
+      <!-- Kolom Kanan: Status Inventori -->
       <div class="col-lg-6">
         <div class="cardx p-4 h-100">
           <div class="d-flex justify-content-between align-items-center mb-4">
@@ -184,80 +86,63 @@
             <span class="badge bg-light text-dark rounded-pill">Real-time</span>
           </div>
 
-          <!-- Stok Habis -->
-          <div class="stock-indicator border-start border-danger border-4">
+          <div class="stock-indicator border-start border-danger border-4" id="stockHabisBlock">
             <div class="indicator-dot bg-out"></div>
             <div class="flex-grow-1">
               <div class="fw-bold">Stok Habis</div>
-              <div class="small text-muted">3 menu tidak dapat dipesan</div>
+              <div class="small text-muted" id="stockHabisText">Memuat...</div>
             </div>
             <i class="bi bi-exclamation-triangle-fill text-danger fs-5"></i>
           </div>
 
-          <!-- Stok Sedikit -->
-          <div class="stock-indicator border-start border-warning border-4">
+          <div class="stock-indicator border-start border-warning border-4" id="stockSedikitBlock">
             <div class="indicator-dot bg-low"></div>
             <div class="flex-grow-1">
               <div class="fw-bold">Stok Sedikit</div>
-              <div class="small text-muted">8 menu butuh restok segera</div>
+              <div class="small text-muted" id="stockSedikitText">Memuat...</div>
             </div>
             <i class="bi bi-clock-history text-warning fs-5"></i>
           </div>
 
-          <!-- Stok Cukup -->
           <div class="stock-indicator border-start border-success border-4">
             <div class="indicator-dot bg-sufficient"></div>
             <div class="flex-grow-1">
               <div class="fw-bold">Stok Tersedia</div>
-              <div class="small text-muted">42 menu dalam kondisi aman</div>
+              <div class="small text-muted" id="stockAmanText">Memuat...</div>
             </div>
             <i class="bi bi-check-circle-fill text-success fs-5"></i>
           </div>
 
-          <div class="mt-4 p-3 bg-light rounded-4">
+          <!-- Notifikasi stok menipis -->
+          <div class="mt-4 p-3 bg-light rounded-4" id="lowStockAlert">
             <div class="small fw-bold mb-2">Item Perlu Perhatian:</div>
-            <div class="d-flex gap-2 flex-wrap">
-              <span class="badge text-bg-danger rounded-pill">Susu UHT</span>
-              <span class="badge text-bg-danger rounded-pill">Telur Ayam</span>
-              <span class="badge text-bg-warning rounded-pill">Beras 5kg</span>
+            <div class="d-flex gap-2 flex-wrap" id="lowStockBadges">
+              <span class="text-muted small">Memuat...</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Transaksi Terbaru (Full Width below grid) -->
+      <!-- Transaksi Terbaru -->
       <div class="col-12">
         <div class="cardx p-4">
           <div class="d-flex justify-content-between mb-4">
-            <h5 class="fw-bold m-0">Aktivitas Terakhir</h5>
-            <a href="#" class="text-decoration-none small fw-semibold">Lihat Semua</a>
+            <h5 class="fw-bold m-0">Transaksi Terbaru Hari Ini</h5>
+            <a href="pos-kasir.html" class="text-decoration-none small fw-semibold">Lihat Semua</a>
           </div>
           <div class="table-responsive">
             <table class="table table-hover align-middle">
               <thead class="table-light">
                 <tr>
+                  <th class="border-0">Kode</th>
                   <th class="border-0">Waktu</th>
-                  <th class="border-0">Menu</th>
                   <th class="border-0">Total</th>
                   <th class="border-0">Metode</th>
                   <th class="border-0">Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>14:32</td>
-                  <td class="fw-medium">Nasi Goreng Spesial</td>
-                  <td class="fw-bold">Rp 32.000</td>
-                  <td><span class="badge rounded-pill bg-light text-dark">QRIS</span></td>
-                  <td><span class="badge rounded-pill bg-success-subtle text-success">Selesai</span></td>
-                </tr>
-                <tr>
-                  <td>14:28</td>
-                  <td class="fw-medium">Es Teh Manis</td>
-                  <td class="fw-bold">Rp 5.000</td>
-                  <td><span class="badge rounded-pill bg-light text-dark">Tunai</span></td>
-                  <td><span class="badge rounded-pill bg-success-subtle text-success">Selesai</span></td>
-                </tr>
+              <tbody id="recentOrdersBody">
+                <tr><td colspan="5" class="text-center text-muted py-3">Memuat transaksi...</td></tr>
               </tbody>
             </table>
           </div>
@@ -267,6 +152,119 @@
     </div>
   </main>
 
-  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API = 'http://127.0.0.1:3001/api';
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    function showToast(msg, type = 'danger') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el).show();
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, { headers: authHeaders(), ...opts });
+      if (res.status === 401) { localStorage.clear(); location.href = 'login.html'; return null; }
+      return res.json();
+    }
+
+    function formatRp(n) {
+      return 'Rp ' + Number(n).toLocaleString('id-ID');
+    }
+
+    // ── Init auth ─────────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken()) { location.href = 'login.html'; }
+
+    document.getElementById('navUserName').textContent = user.full_name || user.username || 'Kasir';
+    document.getElementById('navFullName').textContent = user.full_name || '-';
+    document.getElementById('navRole').textContent     = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
+    document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = 'login.html'; });
+
+    if (user.role === 'owner') {
+      document.getElementById('adminLink').classList.replace('d-none', 'd-flex');
+      document.getElementById('adminMenuItem').style.display = '';
+    }
+
+    // ── Load Dashboard Kasir ──────────────────────────────────────────────
+    async function loadDashboard() {
+      const data = await apiFetch('/dashboard/kasir');
+      if (!data?.data) return;
+      const d = data.data;
+
+      document.getElementById('omzetHarian').textContent   = formatRp(d.omzet_hari_ini);
+      document.getElementById('totalTransaksi').textContent = d.jumlah_transaksi_hari_ini;
+      document.getElementById('transaksiSaya').textContent  = d.transaksi_saya_hari_ini;
+
+      // Stok notifikasi
+      const produkMenipis = d.notifikasi_stok?.produk_menipis || [];
+      const threshold     = d.notifikasi_stok?.threshold || 5;
+
+      let countHabis = 0, countSedikit = 0, countAman = 0;
+      produkMenipis.forEach(p => {
+        if (Number(p.stock) <= 0 || p.status === 'habis') countHabis++;
+        else countSedikit++;
+      });
+
+      // Ambil total produk aktif
+      const prodRes = await apiFetch('/products?limit=1');
+      const total = prodRes?.meta?.total || 0;
+      countAman = Math.max(0, total - countHabis - countSedikit);
+
+      document.getElementById('stockHabisText').textContent   = `${countHabis} menu tidak dapat dipesan`;
+      document.getElementById('stockSedikitText').textContent = `${countSedikit} menu butuh restok segera`;
+      document.getElementById('stockAmanText').textContent    = `${countAman} menu dalam kondisi aman`;
+
+      const badgesEl = document.getElementById('lowStockBadges');
+      if (produkMenipis.length === 0) {
+        badgesEl.innerHTML = '<span class="text-muted small">Semua stok dalam kondisi aman ✓</span>';
+      } else {
+        badgesEl.innerHTML = produkMenipis.map(p => {
+          const cls = Number(p.stock) <= 0 ? 'danger' : 'warning';
+          return `<span class="badge text-bg-${cls} rounded-pill">${p.name} (${p.stock})</span>`;
+        }).join('');
+      }
+    }
+
+    // ── Load Recent Orders ────────────────────────────────────────────────
+    async function loadRecentOrders() {
+      const today = new Date().toISOString().slice(0, 10);
+      const data  = await apiFetch(`/orders?limit=10&from=${today}`);
+      const tbody = document.getElementById('recentOrdersBody');
+      if (!data?.data?.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">Belum ada transaksi hari ini</td></tr>';
+        return;
+      }
+      const statusMap = { paid:'success', unpaid:'warning', cancelled:'danger' };
+      tbody.innerHTML = data.data.map(o => `
+        <tr>
+          <td class="fw-medium small">${o.order_code}</td>
+          <td class="text-muted small">${new Date(o.created_at).toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})}</td>
+          <td class="fw-bold">${formatRp(o.total)}</td>
+          <td><span class="badge bg-light text-dark border rounded-pill">${o.payment_method}</span></td>
+          <td><span class="badge bg-${statusMap[o.order_status]}-subtle text-${statusMap[o.order_status]} rounded-pill">${o.order_status}</span></td>
+        </tr>`).join('');
+    }
+
+    loadDashboard();
+    loadRecentOrders();
+  </script>
 </body>
 </html>

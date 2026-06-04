@@ -1,0 +1,380 @@
+/* 
+   ==========================================================================
+   GLOBAL STYLES & RESET
+   ========================================================================== 
+*/
+body {
+  background: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+}
+
+/* 
+   ==========================================================================
+   COMMON COMPONENTS (NAVBAR, LOGO, CARDS)
+   ========================================================================== 
+*/
+
+/* Top Navigation Styling (Non-Admin) */
+.navbar-main {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+}
+
+.nav-tabs-custom {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-tabs-custom a {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 500;
+  padding: 1.5rem 0;
+  display: block;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-tabs-custom a.active {
+  color: #0d6efd;
+}
+
+.nav-tabs-custom a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #0d6efd;
+}
+
+/* Shared Card Style (cardx) */
+.cardx, .table-container, .table-card {
+  background: white;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+
+/* 
+   ==========================================================================
+   POS & PRODUCT MANAGEMENT
+   ========================================================================== 
+*/
+.product-card {
+  background: white;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.product-img-container {
+  position: relative;
+  padding-top: 75%;
+  background: #f1f5f9;
+}
+
+.product-img-container img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.stock-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.product-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f1f5f9;
+}
+
+/* Cart Sidebar */
+.cart-sidebar {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  height: calc(100vh - 120px);
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 991.98px) {
+  .cart-fixed-bottom {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 1030;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    padding: 16px 24px;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-pos-content {
+    padding-bottom: 100px;
+  }
+}
+
+/* 
+   ==========================================================================
+   ADMIN PANEL STYLES
+   ========================================================================== 
+*/
+.sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 1040;
+  background: #1a1a2e;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-nav {
+  padding: 16px 12px;
+  list-style: none;
+  margin: 0;
+}
+
+.sidebar-nav li a {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.sidebar-nav li.active a {
+  color: #fff;
+  background: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.top-navbar {
+  margin-left: 250px;
+  height: 64px;
+  z-index: 1030;
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar { left: -250px; }
+  .sidebar.show { left: 0; }
+  .top-navbar, .main-content { margin-left: 0; }
+}
+
+/* 
+   ==========================================================================
+   UTILITIES & DASHBOARD ELEMENTS
+   ========================================================================== 
+*/
+.revenue-large { font-size: 2.5rem; font-weight: 700; color: #0d6efd; }
+.stat-label { font-size: 0.875rem; text-transform: uppercase; font-weight: 600; color: #64748b; }
+
+.stock-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  margin-bottom: 8px;
+}
+
+.status-dot, .indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bg-out { background-color: #ef4444; }
+.bg-low { background-color: #f59e0b; }
+.bg-sufficient { background-color: #10b981; }
+
+.badge-soft-info { background-color: #e0f2fe; color: #0369a1; }
+.badge-soft-warning { background-color: #fef3c7; color: #92400e; }
+.badge-soft-danger { background-color: #fee2e2; color: #991b1b; }
+.badge-soft-success { background-color: #d1fae5; color: #065f46; }
+
+.btn-action {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/*
+   ========================================================================== 
+   POS & PRODUCT MANAGEMENT (additional rules from inline <style>)
+   ========================================================================== 
+*/
+
+.btn-add-cart {
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.cart-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid white;
+}
+
+.modal-content {
+  border-radius: 24px;
+  border: none;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-items-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.main-pos-content {
+  padding-bottom: 100px;
+}
+
+.search-bar {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 991.98px) {
+  .main-pos-content {
+    padding-bottom: 100px;
+  }
+}
+
+.btn-checkout {
+  background-color: #10b981;
+  border: none;
+  color: white;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.btn-checkout:hover {
+  background-color: #059669;
+}
+
+/*
+   ========================================================================== 
+   PRODUCT MANAGEMENT (additional rules from inline <style>)
+   ========================================================================== 
+*/
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.cardx {
+  overflow: hidden;
+}
+
+.nav-pills-custom .nav-link {
+  color: #64748b;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.nav-pills-custom .nav-link.active {
+  background-color: #f1f5f9;
+  color: #0d6efd;
+}
+

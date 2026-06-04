@@ -3,126 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KantinGO - Manajemen Produk Modern</title>
+  <title>KantinGO - Manajemen Produk</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: #f8fafc;
-      font-family: 'Inter', sans-serif;
-      color: #1e293b;
-    }
-
-    /* Top Navigation Styling */
-    .navbar-main {
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none !important;
-    }
-
-    .logo-icon {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, #0d6efd, #0dcaf0);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-    }
-
-    .nav-tabs-custom {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-tabs-custom a {
-      text-decoration: none;
-      color: #64748b;
-      font-weight: 500;
-      padding: 1.5rem 0;
-      display: block;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    .nav-tabs-custom a.active {
-      color: #0d6efd;
-    }
-
-    .nav-tabs-custom a.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: #0d6efd;
-    }
-
-    .cardx {
-      background: white;
-      border: none;
-      border-radius: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .product-thumb {
-      width: 48px;
-      height: 48px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #f1f5f9;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 6px;
-    }
-
-    .btn-action {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-    }
-
-    .nav-pills-custom .nav-link {
-      color: #64748b;
-      font-weight: 500;
-      border-radius: 10px;
-      padding: 10px 20px;
-    }
-
-    .nav-pills-custom .nav-link.active {
-      background-color: #f1f5f9;
-      color: #0d6efd;
-    }
-  </style>
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
 
@@ -138,12 +25,26 @@
           <ul class="nav-tabs-custom">
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="pos-kasir.html">POS Kasir</a></li>
-            <li><a href="#" class="active">Manajemen Produk</a></li>
+            <li><a href="manajemen-produk.html" class="active">Manajemen Produk</a></li>
           </ul>
         </div>
-        <div class="d-flex gap-3">
-          <button class="btn btn-light rounded-circle"><i class="bi bi-bell"></i></button>
-          <div class="btn btn-primary rounded-pill px-4 d-none d-md-block">Owner Account</div>
+        <div class="d-flex gap-3 align-items-center">
+          <a href="Admin/admin-dashboard.html" id="adminLink" class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0" style="background:#1a1a2e">
+            <i class="bi bi-shield-lock-fill text-primary"></i><span class="small fw-bold">Panel Admin</span>
+          </a>
+          <div class="dropdown">
+            <button class="btn btn-primary rounded-pill px-4 dropdown-toggle" data-bs-toggle="dropdown">
+              <span id="navUserName">User</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="px-3 py-2 border-bottom">
+                <div class="fw-semibold small" id="navFullName"></div>
+                <div class="text-muted small" id="navRole"></div>
+              </li>
+              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
+              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -155,25 +56,48 @@
         <h2 class="fw-bold m-0">Inventori Produk</h2>
         <p class="text-muted m-0">Kelola menu, harga, dan ketersediaan stok.</p>
       </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-secondary rounded-pill px-3"><i class="bi bi-download me-2"></i>Export CSV</button>
-        <button class="btn btn-outline-secondary rounded-pill px-3"><i class="bi bi-upload me-2"></i>Import CSV</button>
-        <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#productModal">
-          <i class="bi bi-plus-lg me-2"></i>Tambah Produk Baru
+      <div class="d-flex gap-2 flex-wrap" id="ownerActions" style="display:none!important">
+        <button class="btn btn-outline-secondary rounded-pill px-3" id="btnExportCSV"><i class="bi bi-download me-2"></i>Export CSV</button>
+        <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#productModal" id="btnAddProduct">
+          <i class="bi bi-plus-lg me-2"></i>Tambah Produk
         </button>
       </div>
     </div>
 
+    <!-- Search & Filter -->
+    <div class="cardx p-3 mb-4">
+      <div class="row g-3">
+        <div class="col-md-5">
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" class="form-control" id="searchProduct" placeholder="Cari nama produk...">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="filterCategory">
+            <option value="">Semua Kategori</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="form-select" id="filterStatus">
+            <option value="">Semua Status</option>
+            <option value="tersedia">Tersedia</option>
+            <option value="habis">Habis</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <ul class="nav nav-pills nav-pills-custom mb-4" id="pills-tab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="pills-list-tab" data-bs-toggle="pill" data-bs-target="#pills-list" type="button">Daftar Produk</button>
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-list" type="button">Daftar Produk</button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-log-tab" data-bs-toggle="pill" data-bs-target="#pills-log" type="button">Log Aktivitas Stok</button>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-log" type="button">Log Aktivitas Stok</button>
       </li>
     </ul>
 
-    <div class="tab-content" id="pills-tabContent">
+    <div class="tab-content">
       <!-- Tab Daftar Produk -->
       <div class="tab-pane fade show active" id="pills-list">
         <div class="cardx overflow-hidden">
@@ -185,120 +109,408 @@
                   <th>Nama Produk</th>
                   <th>Harga</th>
                   <th>Stok</th>
+                  <th>Status</th>
                   <th class="text-end pe-4">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td class="ps-4"><img src="https://images.unsplash.com/photo-1512058560566-4334670a1c10?w=100" class="product-thumb" alt=""></td>
-                  <td><div class="fw-bold">Nasi Goreng Spesial</div><span class="text-muted small">Campus Cafe</span></td>
-                  <td>Rp 15.000</td>
-                  <td>
-                    <span class="status-dot bg-success"></span> 42 
-                    <span class="badge bg-success-subtle text-success ms-2 small">Cukup</span>
-                  </td>
-                  <td class="text-end pe-4">
-                    <button class="btn btn-light btn-action text-primary me-1" title="Tambah Stok"><i class="bi bi-plus-circle"></i></button>
-                    <button class="btn btn-light btn-action text-secondary me-1" title="Edit"><i class="bi bi-pencil"></i></button>
-                    <button class="btn btn-light btn-action text-danger" title="Hapus"><i class="bi bi-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="ps-4"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100" class="product-thumb" alt=""></td>
-                  <td><div class="fw-bold">Ayam Geprek Bento</div><span class="text-muted small">Kantin Bu Siti</span></td>
-                  <td>Rp 23.000</td>
-                  <td>
-                    <span class="status-dot bg-warning"></span> 5 
-                    <span class="badge bg-warning-subtle text-warning ms-2 small">Sedikit</span>
-                  </td>
-                  <td class="text-end pe-4">
-                    <button class="btn btn-light btn-action text-primary me-1"><i class="bi bi-plus-circle"></i></button>
-                    <button class="btn btn-light btn-action text-secondary me-1"><i class="bi bi-pencil"></i></button>
-                    <button class="btn btn-light btn-action text-danger"><i class="bi bi-trash"></i></button>
-                  </td>
-                </tr>
+              <tbody id="productTableBody">
+                <tr><td colspan="6" class="text-center py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat produk...</td></tr>
               </tbody>
             </table>
+          </div>
+          <div class="d-flex justify-content-between align-items-center px-4 py-3 border-top" id="paginationBar">
+            <span class="text-muted small" id="paginationInfo"></span>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-light border" id="btnPrevPage" disabled><i class="bi bi-chevron-left"></i></button>
+              <button class="btn btn-sm btn-light border" id="btnNextPage" disabled><i class="bi bi-chevron-right"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab Log Aktivitas Stok -->
+      <!-- Tab Log Stok -->
       <div class="tab-pane fade" id="pills-log">
         <div class="cardx p-4">
           <h5 class="fw-bold mb-4">Riwayat Perubahan Stok</h5>
-          <div class="d-flex flex-column gap-3">
-            <div class="d-flex align-items-center gap-3 p-3 border-start border-primary border-4 bg-light rounded-3">
-              <div class="bg-primary text-white rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-plus-lg"></i>
-              </div>
-              <div class="flex-grow-1">
-                <div class="fw-bold">Kasir Ahmad menambah 10 item Ayam Geprek</div>
-                <div class="text-muted small">Update manual inventori</div>
-              </div>
-              <div class="text-end text-muted small">14:32 WIB</div>
-            </div>
-            <div class="d-flex align-items-center gap-3 p-3 border-start border-danger border-4 bg-light rounded-3">
-              <div class="bg-danger text-white rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-cart-dash"></i>
-              </div>
-              <div class="flex-grow-1">
-                <div class="fw-bold">Pengurangan stok sistem: Nasi Goreng Spesial (-2)</div>
-                <div class="text-muted small">Transaksi #TRX-9921</div>
-              </div>
-              <div class="text-end text-muted small">14:15 WIB</div>
-            </div>
+          <div id="stockLogList">
+            <div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat log...</div>
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Modal Tambah Produk -->
+  <!-- Modal Tambah/Edit Produk (Owner only) -->
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-content border-0 shadow-lg" style="border-radius:20px">
         <div class="modal-header border-0">
-          <h5 class="modal-title fw-bold">Input Data Produk Baru</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title fw-bold" id="productModalTitle">Input Data Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Nama Produk</label>
-              <input type="text" class="form-control" placeholder="Nama menu">
+          <input type="hidden" id="productId">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nama Produk <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="productName" placeholder="Nama menu" required>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label fw-semibold">Harga (Rp) <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" id="productPrice" placeholder="0" min="0" required>
             </div>
-            <div class="row">
-              <div class="col-6 mb-3">
-                <label class="form-label fw-semibold">Harga (Rp)</label>
-                <input type="number" class="form-control" placeholder="0">
-              </div>
-              <div class="col-6 mb-3">
-                <label class="form-label fw-semibold">Stok</label>
-                <input type="number" class="form-control" placeholder="0">
-              </div>
+            <div class="col-6">
+              <label class="form-label fw-semibold">Stok Awal</label>
+              <input type="number" class="form-control" id="productStock" placeholder="0" min="0">
             </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Gambar Produk</label>
-              <input type="file" class="form-control">
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Status</label>
-              <select class="form-select">
-                <option selected>Tersedia</option>
-                <option value="1">Habis</option>
-              </select>
-            </div>
-          </form>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Kategori</label>
+            <select class="form-select" id="productCategory">
+              <option value="">Tanpa Kategori</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">URL Gambar</label>
+            <input type="url" class="form-control" id="productImage" placeholder="https://...">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Status</label>
+            <select class="form-select" id="productStatus">
+              <option value="tersedia">Tersedia</option>
+              <option value="habis">Habis</option>
+            </select>
+          </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-0">
           <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-          <button class="btn btn-primary rounded-pill px-4">Simpan</button>
+          <button class="btn btn-primary rounded-pill px-4 fw-bold" id="btnSaveProduct">Simpan</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Modal Update Stok -->
+  <div class="modal fade" id="stockModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius:20px">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Update Stok</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="stockProductId">
+          <p class="fw-semibold mb-3" id="stockProductName"></p>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Jenis Pergerakan <span class="text-danger">*</span></label>
+            <select class="form-select" id="stockMovementType">
+              <option value="in">Tambah Stok (masuk)</option>
+              <option value="out">Kurangi Stok (keluar)</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Jumlah <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="stockQty" placeholder="0" min="1" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Catatan</label>
+            <input type="text" class="form-control" id="stockNote" placeholder="Opsional">
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-primary rounded-pill px-4 fw-bold" id="btnSaveStock">Update Stok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API = 'http://127.0.0.1:3001/api';
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    function showToast(msg, type = 'success') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el, { delay: 3000 }).show();
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, { headers: authHeaders(), ...opts });
+      if (res.status === 401) { localStorage.clear(); location.href = 'login.html'; return null; }
+      return res.json();
+    }
+
+    function formatRp(n) { return 'Rp ' + Number(n).toLocaleString('id-ID'); }
+
+    // ── Auth ─────────────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken()) { location.href = 'login.html'; }
+    document.getElementById('navUserName').textContent = user.full_name || user.username || 'User';
+    document.getElementById('navFullName').textContent = user.full_name || '-';
+    document.getElementById('navRole').textContent     = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
+    document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = 'login.html'; });
+
+    const isOwner = user.role === 'owner';
+    if (isOwner) {
+      document.getElementById('adminLink').classList.replace('d-none', 'd-flex');
+      document.getElementById('adminMenuItem').style.display = '';
+      document.getElementById('ownerActions').style.removeProperty('display');
+    }
+
+    // ── Pagination State ─────────────────────────────────────────────────
+    let currentPage  = 1;
+    const PAGE_LIMIT = 20;
+    let totalProducts = 0;
+
+    // ── Load Kategori ─────────────────────────────────────────────────────
+    async function loadCategories() {
+      const data = await apiFetch('/categories');
+      const opts = (data?.data || []).map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+      document.getElementById('filterCategory').insertAdjacentHTML('beforeend', opts);
+      document.getElementById('productCategory').insertAdjacentHTML('beforeend', opts);
+    }
+
+    // ── Load Produk ───────────────────────────────────────────────────────
+    async function loadProducts(page = 1) {
+      currentPage = page;
+      const q       = document.getElementById('searchProduct').value.trim();
+      const catId   = document.getElementById('filterCategory').value;
+      const status  = document.getElementById('filterStatus').value;
+
+      let url = `/products?limit=${PAGE_LIMIT}&page=${page}`;
+      if (q)      url += `&q=${encodeURIComponent(q)}`;
+      if (catId)  url += `&category_id=${catId}`;
+      if (status) url += `&status=${status}`;
+
+      const tbody = document.getElementById('productTableBody');
+      tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat...</td></tr>';
+
+      const data = await apiFetch(url);
+      if (!data) return;
+
+      totalProducts = data.meta?.total || 0;
+      const products = data.data || [];
+
+      if (products.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Produk tidak ditemukan</td></tr>';
+        updatePagination();
+        return;
+      }
+
+      tbody.innerHTML = products.map(p => {
+        const isHabis = p.status === 'habis' || Number(p.stock) <= 0;
+        const stockBadge = isHabis
+          ? `<span class="badge bg-danger-subtle text-danger rounded-pill">Habis</span>`
+          : Number(p.stock) <= 5
+            ? `<span class="badge bg-warning-subtle text-warning rounded-pill">Sedikit (${p.stock})</span>`
+            : `<span class="badge bg-success-subtle text-success rounded-pill">Aman (${p.stock})</span>`;
+
+        const imgSrc = p.image_url || 'https://via.placeholder.com/100?text=No+Img';
+        const ownerBtns = isOwner ? `
+          <button class="btn btn-light btn-action text-secondary me-1" title="Edit" onclick="openEditProduct(${JSON.stringify(JSON.stringify(p))})"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-light btn-action text-danger" title="Hapus" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g,'&#39;')}')"><i class="bi bi-trash"></i></button>` : '';
+
+        return `<tr>
+          <td class="ps-4"><img src="${imgSrc}" class="product-thumb" alt="${p.name}" onerror="this.src='https://via.placeholder.com/100?text=No+Img'"></td>
+          <td>
+            <div class="fw-bold">${p.name}</div>
+            <span class="text-muted small">${p.category?.name || 'Tanpa Kategori'}</span>
+          </td>
+          <td class="fw-semibold">${formatRp(p.price)}</td>
+          <td><span class="status-dot ${isHabis ? 'bg-danger' : Number(p.stock)<=5 ? 'bg-warning' : 'bg-success'}"></span>${p.stock}</td>
+          <td>${stockBadge}</td>
+          <td class="text-end pe-4">
+            <button class="btn btn-light btn-action text-primary me-1" title="Update Stok" onclick="openStockModal(${p.id}, '${p.name.replace(/'/g,'&#39;')}')"><i class="bi bi-plus-circle"></i></button>
+            ${ownerBtns}
+          </td>
+        </tr>`;
+      }).join('');
+
+      updatePagination();
+    }
+
+    function updatePagination() {
+      const totalPages = Math.ceil(totalProducts / PAGE_LIMIT);
+      document.getElementById('paginationInfo').textContent = `${totalProducts} produk, halaman ${currentPage} / ${Math.max(1,totalPages)}`;
+      document.getElementById('btnPrevPage').disabled = currentPage <= 1;
+      document.getElementById('btnNextPage').disabled = currentPage >= totalPages;
+    }
+
+    document.getElementById('btnPrevPage').addEventListener('click', () => loadProducts(currentPage - 1));
+    document.getElementById('btnNextPage').addEventListener('click', () => loadProducts(currentPage + 1));
+
+    // Filter events
+    document.getElementById('searchProduct').addEventListener('input', () => loadProducts(1));
+    document.getElementById('filterCategory').addEventListener('change', () => loadProducts(1));
+    document.getElementById('filterStatus').addEventListener('change', () => loadProducts(1));
+
+    // ── Tambah / Edit Produk (Owner) ──────────────────────────────────────
+    const productModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('productModal'));
+
+    document.getElementById('btnAddProduct')?.addEventListener('click', () => {
+      document.getElementById('productModalTitle').textContent = 'Tambah Produk Baru';
+      document.getElementById('productId').value    = '';
+      document.getElementById('productName').value  = '';
+      document.getElementById('productPrice').value = '';
+      document.getElementById('productStock').value = '';
+      document.getElementById('productImage').value = '';
+      document.getElementById('productStatus').value = 'tersedia';
+      document.getElementById('productCategory').value = '';
+    });
+
+    function openEditProduct(jsonStr) {
+      const p = JSON.parse(jsonStr);
+      document.getElementById('productModalTitle').textContent = 'Edit Produk';
+      document.getElementById('productId').value     = p.id;
+      document.getElementById('productName').value   = p.name;
+      document.getElementById('productPrice').value  = p.price;
+      document.getElementById('productStock').value  = p.stock;
+      document.getElementById('productImage').value  = p.image_url || '';
+      document.getElementById('productStatus').value = p.status;
+      document.getElementById('productCategory').value = p.category_id || '';
+      productModal().show();
+    }
+
+    document.getElementById('btnSaveProduct').addEventListener('click', async () => {
+      const id    = document.getElementById('productId').value;
+      const name  = document.getElementById('productName').value.trim();
+      const price = Number(document.getElementById('productPrice').value);
+      const stock = Number(document.getElementById('productStock').value);
+      const image = document.getElementById('productImage').value.trim();
+      const status = document.getElementById('productStatus').value;
+      const catId  = document.getElementById('productCategory').value;
+
+      if (!name) { showToast('Nama produk wajib diisi', 'warning'); return; }
+      if (isNaN(price) || price < 0) { showToast('Harga tidak valid', 'warning'); return; }
+      if (stock < 0) { showToast('Stok tidak boleh negatif', 'warning'); return; }
+
+      const payload = { name, price, stock, status, image_url: image || null, category_id: catId || null };
+      const isEdit  = !!id;
+      const url     = isEdit ? `/products/${id}` : '/products';
+      const method  = isEdit ? 'PUT' : 'POST';
+
+      const btn = document.getElementById('btnSaveProduct');
+      btn.disabled = true;
+      const res = await apiFetch(url, { method, body: JSON.stringify(payload) });
+      btn.disabled = false;
+
+      if (res && (res.status === 200 || res.status === 201)) {
+        showToast(isEdit ? 'Produk berhasil diupdate' : 'Produk berhasil ditambahkan', 'success');
+        productModal().hide();
+        loadProducts(currentPage);
+      } else {
+        showToast(res?.message || 'Gagal menyimpan produk', 'danger');
+      }
+    });
+
+    async function deleteProduct(id, name) {
+      if (!confirm(`Hapus produk "${name}"? Tindakan ini tidak dapat dibatalkan.`)) return;
+      const res = await apiFetch(`/products/${id}`, { method: 'DELETE' });
+      if (res?.status === 200) {
+        showToast('Produk dihapus', 'success');
+        loadProducts(currentPage);
+      } else {
+        showToast(res?.message || 'Gagal menghapus', 'danger');
+      }
+    }
+
+    // ── Update Stok ───────────────────────────────────────────────────────
+    const stockModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('stockModal'));
+
+    function openStockModal(productId, productName) {
+      document.getElementById('stockProductId').value    = productId;
+      document.getElementById('stockProductName').textContent = productName;
+      document.getElementById('stockQty').value          = '';
+      document.getElementById('stockNote').value         = '';
+      document.getElementById('stockMovementType').value = 'in';
+      stockModal().show();
+    }
+
+    document.getElementById('btnSaveStock').addEventListener('click', async () => {
+      const productId = document.getElementById('stockProductId').value;
+      const qty       = Number(document.getElementById('stockQty').value);
+      const type      = document.getElementById('stockMovementType').value;
+      const note      = document.getElementById('stockNote').value.trim();
+
+      if (!qty || qty < 1) { showToast('Jumlah minimal 1', 'warning'); return; }
+
+      const btn = document.getElementById('btnSaveStock');
+      btn.disabled = true;
+      const res = await apiFetch(`/products/${productId}/stock`, {
+        method: 'PATCH',
+        body: JSON.stringify({ qty, movement_type: type, note }),
+      });
+      btn.disabled = false;
+
+      if (res?.status === 200) {
+        showToast(`Stok berhasil diupdate: ${res.data.stock_before} -> ${res.data.stock_after}`, 'success');
+        stockModal().hide();
+        loadProducts(currentPage);
+        loadStockLog();
+      } else {
+        showToast(res?.message || 'Gagal update stok', 'danger');
+      }
+    });
+
+    // ── Log Stok ──────────────────────────────────────────────────────────
+    async function loadStockLog() {
+      // Ambil movement dari semua produk (via query inventori — pakai products baru untuk log visual)
+      // Kita tampilkan 30 pergerakan terbaru langsung dari DB melalui endpoint products
+      const logEl = document.getElementById('stockLogList');
+      // Karena tidak ada endpoint /inventory-movements publik, kita tampilkan info sederhana
+      logEl.innerHTML = `
+        <div class="alert alert-info small mb-0">
+          <i class="bi bi-info-circle me-2"></i>
+          Log stok dicatat otomatis setiap update stok atau transaksi POS. 
+          Riwayat lengkap tersedia di laporan Admin.
+        </div>
+        <div class="mt-3 text-muted small text-center">
+          Gunakan Panel Admin → Manajemen Produk untuk melihat log detail inventori.
+        </div>`;
+    }
+
+    // ── Export CSV ────────────────────────────────────────────────────────
+    document.getElementById('btnExportCSV')?.addEventListener('click', async () => {
+      const data = await apiFetch('/products?limit=1000');
+      if (!data?.data) return;
+      const rows = [['ID','Nama','Harga','Stok','Status','Kategori']];
+      data.data.forEach(p => rows.push([p.id, p.name, p.price, p.stock, p.status, p.category?.name || '']));
+      const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+      const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `produk-kantingo-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    });
+
+    // ── Tab switch: load log saat tab aktif ───────────────────────────────
+    document.querySelectorAll('[data-bs-toggle="pill"]').forEach(btn => {
+      btn.addEventListener('shown.bs.tab', e => {
+        if (e.target.dataset.bsTarget === '#pills-log') loadStockLog();
+      });
+    });
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    loadCategories();
+    loadProducts();
+  </script>
 </body>
 </html>

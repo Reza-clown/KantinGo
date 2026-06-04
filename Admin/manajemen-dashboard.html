@@ -1,76 +1,56 @@
 <!doctype html>
 <html lang="id">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KantinGO - Manajemen Karyawan</title>
-  <!-- Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="admin-dashboard.css">
+  <link rel="stylesheet" href="../global.css">
 </head>
-
 <body>
 
   <!-- Sidebar -->
   <nav id="sidebar" class="sidebar">
     <div class="sidebar-header">
-      <a href="dashboard.html" class="navbar-logo">
+      <a href="../dashboard.html" class="navbar-logo">
         <div class="logo-icon"><i class="bi bi-shop-window"></i></div>
         <div class="fw-bold fs-4 text-light mb-0">Kantin<span class="text-primary">GO</span></div>
       </a>
     </div>
     <ul class="sidebar-nav">
-      <li><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
-      </li>
+      <li><a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a></li>
       <li><a href="manajemen-produk.html"><i class="bi bi-basket"></i> Manajemen Produk</a></li>
       <li class="active"><a href="manajemen-dashboard.html"><i class="bi bi-people"></i> Manajemen Karyawan</a></li>
       <li><a href="report.html"><i class="bi bi-receipt"></i> Laporan Transaksi</a></li>
       <li><a href="pengaturan-sistem.html"><i class="bi bi-gear"></i> Pengaturan Sistem</a></li>
+      <li class="mt-2 pt-2" style="border-top:1px solid rgba(255,255,255,.1)">
+        <a href="../pos-kasir.html"><i class="bi bi-cart3"></i> POS Kasir</a>
+      </li>
+      <li><a href="../dashboard.html"><i class="bi bi-house"></i> Dashboard Kasir</a></li>
     </ul>
   </nav>
-
-  <!-- Mobile Overlay -->
   <div id="sidebarOverlay" class="sidebar-overlay d-lg-none"></div>
 
-  <!-- Top Navbar -->
+  <!-- Navbar -->
   <nav class="navbar top-navbar fixed-top px-4">
     <div class="container-fluid">
       <div class="d-flex align-items-center gap-4">
-        <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle">
-          <i class="bi bi-list fs-4"></i>
-        </button>
+        <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle"><i class="bi bi-list fs-4"></i></button>
         <span class="navbar-brand d-none d-lg-block m-0">Admin Panel</span>
-        <!-- Main Navigation Links -->
-        <div class="d-none d-xl-flex gap-3 ms-4 border-start ps-4">
-          <a href="../dashboard.html" class="text-decoration-none text-muted fw-medium small">Dashboard Owner</a>
-          <a href="../pos-kasir.html" class="text-decoration-none text-muted fw-medium small">POS Kasir</a>
-          <a href="../manajemen-produk.html" class="text-decoration-none text-muted fw-medium small">Manajemen
-            Produk</a>
-          <a href="admin-dashboard.html" class="text-decoration-none text-primary fw-bold small">Admin</a>
-        </div>
       </div>
       <div class="ms-auto d-flex align-items-center gap-3">
         <div class="dropdown">
-          <button
-            class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle"
-            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="avatar-circle">AD</div>
-            <span class="d-none d-md-block fw-medium">Admin User</span>
+          <button class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle"
+            type="button" data-bs-toggle="dropdown">
+            <div class="avatar-circle" id="navAvatar">OW</div>
+            <span class="d-none d-md-block fw-medium" id="navName">Owner</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+            <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
           </ul>
         </div>
       </div>
@@ -83,347 +63,351 @@
 
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 class="fw-bold m-0 page-title">Manajemen Karyawan</h2>
-          <p class="text-muted mb-0">Kelola akses, jabatan, dan riwayat aktivitas staf.</p>
+          <h2 class="fw-bold m-0">Manajemen Karyawan</h2>
+          <p class="text-muted mb-0">Kelola akun kasir dan hak akses staf.</p>
         </div>
-        <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold" data-bs-toggle="modal"
-          data-bs-target="#addKaryawanModal">
-          <i class="bi bi-plus-lg me-1"></i> Tambah Karyawan Baru
+        <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold"
+          data-bs-toggle="modal" data-bs-target="#addKaryawanModal" id="btnTambahKaryawan">
+          <i class="bi bi-plus-lg me-1"></i>Tambah Karyawan
         </button>
       </div>
 
-      <div class="card search-card shadow-sm mb-4 p-3">
+      <!-- Search & Filter -->
+      <div class="card shadow-sm mb-4 p-3">
         <div class="row g-3">
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-              <input type="text" class="form-control border-start-0" id="searchKaryawan"
-                placeholder="Cari nama karyawan...">
+              <input type="text" class="form-control border-start-0" id="searchKaryawan" placeholder="Cari nama / username...">
             </div>
           </div>
           <div class="col-md-2">
+            <select class="form-select" id="filterRole">
+              <option value="">Semua Role</option>
+              <option value="owner">Owner</option>
+              <option value="kasir">Kasir</option>
+            </select>
+          </div>
+          <div class="col-md-2">
             <select class="form-select" id="filterStatus">
-              <option selected value="">Status </option>
-              <option value="Aktif">Aktif</option>
-              <option value="Nonaktif">Nonaktif</option>
+              <option value="">Semua Status</option>
+              <option value="1">Aktif</option>
+              <option value="0">Nonaktif</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- Tabs -->
-      <ul class="nav nav-pills nav-pills-custom mb-4" id="employeeTabs" role="tablist">
-        <li class="nav-item">
-          <button class="nav-link active" id="list-tab" data-bs-toggle="pill" data-bs-target="#list-content"
-            type="button">Daftar Karyawan</button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link" id="log-tab" data-bs-toggle="pill" data-bs-target="#log-content" type="button">Log
-            Aktivitas Karyawan</button>
-        </li>
-      </ul>
-
-      <div class="tab-content">
-        <!-- Tab: Daftar Karyawan -->
-        <div class="tab-pane fade show active" id="list-content">
-          <div class="card table-card shadow-sm">
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0" id="karyawanTable">
-                <thead>
-                  <tr>
-                    <th class="ps-4">Nama</th>
-                    <th>Jabatan</th>
-                    <th>Username</th>
-                    <th>Hak Akses</th>
-                    <th>Status</th>
-                    <th class="text-end pe-4">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-id="1">
-                    <td class="ps-4 fw-bold text-dark">Budi Santoso</td>
-                    <td class="text-muted small">Kasir</td>
-                    <td class="text-dark fw-medium">budi_kantingo</td>
-                    <td><span class="badge bg-light text-primary border border-primary-subtle">Full Access</span></td>
-                    <td><span class="status-dot bg-success"></span><span
-                        class="badge badge-soft-success rounded-pill">Aktif</span></td>
-                    <td class="text-end pe-4">
-                      <button class="btn btn-sm btn-outline-primary btn-action me-1" title="Atur Hak Akses"><i
-                          class="bi bi-shield-lock"></i></button>
-                      <button class="btn btn-sm btn-outline-secondary btn-action me-1" title="Edit"><i
-                          class="bi bi-pencil"></i></button>
-                      <button class="btn btn-sm btn-outline-danger btn-action" title="Hapus"
-                        onclick="deleteKaryawan('Budi Santoso')"><i class="bi bi-trash"></i></button>
-                    </td>
-                  </tr>
-                  <tr data-id="2">
-                    <td class="ps-4 fw-bold text-dark">Siti Aminah</td>
-                    <td class="text-muted small">Manager</td>
-                    <td class="text-dark fw-medium">siti_kantingo</td>
-                    <td><span class="badge bg-light text-primary border border-primary-subtle">Admin</span></td>
-                    <td><span class="status-dot bg-success"></span><span
-                        class="badge badge-soft-success rounded-pill">Aktif</span></td>
-                    <td class="text-end pe-4">
-                      <button class="btn btn-sm btn-outline-primary btn-action me-1"><i
-                          class="bi bi-shield-lock"></i></button>
-                      <button class="btn btn-sm btn-outline-secondary btn-action me-1"><i
-                          class="bi bi-pencil"></i></button>
-                      <button class="btn btn-sm btn-outline-danger btn-action"
-                        onclick="deleteKaryawan('Siti Aminah')"><i class="bi bi-trash"></i></button>
-                    </td>
-                  </tr>
-                  <tr data-id="3">
-                    <td class="ps-4 fw-bold text-dark">Ahmad Rizki</td>
-                    <td class="text-muted small">Kasir</td>
-                    <td class="text-dark fw-medium">ahmad_rizki</td>
-                    <td><span class="badge bg-light text-secondary border">POS Only</span></td>
-                    <td><span class="status-dot bg-danger"></span><span
-                        class="badge badge-soft-danger rounded-pill">Nonaktif</span></td>
-                    <td class="text-end pe-4">
-                      <button class="btn btn-sm btn-outline-primary btn-action me-1"><i
-                          class="bi bi-shield-lock"></i></button>
-                      <button class="btn btn-sm btn-outline-secondary btn-action me-1"><i
-                          class="bi bi-pencil"></i></button>
-                      <button class="btn btn-sm btn-outline-danger btn-action"
-                        onclick="deleteKaryawan('Ahmad Rizki')"><i class="bi bi-trash"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+      <!-- Tabel Karyawan -->
+      <div class="card table-card shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th class="ps-4">Nama</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Bergabung</th>
+                <th class="text-end pe-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="karyawanTableBody">
+              <tr><td colspan="6" class="text-center py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat...</td></tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- Tab: Log Aktivitas Karyawan -->
-        <div class="tab-pane fade" id="log-content">
-          <div class="card table-card shadow-sm p-4">
-            <h5 class="fw-bold mb-4">Riwayat Aktivitas Terakhir</h5>
-            <div class="list-group list-group-flush">
-              <div class="list-group-item px-0 py-3 border-0 border-bottom">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-start gap-3">
-                    <div class="icon-box bg-success-subtle text-success" style="width: 40px; height: 40px;">
-                      <i class="bi bi-box-arrow-in-right fs-6"></i>
-                    </div>
-                    <div>
-                      <p class="m-0 fw-semibold text-dark">Kasir Budi Santoso melakukan Login</p>
-                      <small class="text-muted">Akses dari terminal POS #01</small>
-                    </div>
-                  </div>
-                  <span class="text-muted small">08:15 WIB</span>
-                </div>
-              </div>
-              <div class="list-group-item px-0 py-3 border-0">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-start gap-3">
-                    <div class="icon-box bg-primary-subtle text-primary" style="width: 40px; height: 40px;">
-                      <i class="bi bi-plus-lg fs-6"></i>
-                    </div>
-                    <div>
-                      <p class="m-0 fw-semibold text-dark">Kasir Siti Aminah menambah stok produk</p>
-                      <small class="text-muted">Nasi Goreng Spesial (+10 item)</small>
-                    </div>
-                  </div>
-                  <span class="text-muted small">14:32 WIB</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>
   </div>
 
   <!-- Modal Tambah Karyawan -->
-  <div class="modal fade" id="addKaryawanModal" tabindex="-1" aria-labelledby="addKaryawanModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="addKaryawanModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content shadow">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="addKaryawanModalLabel">Tambah Karyawan Baru</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title fw-bold">Tambah Karyawan Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="formAddKaryawan">
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Nama</label>
-              <input type="text" class="form-control" id="addNama" placeholder="Contoh: John Doe" required>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Nama Lengkap <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="addFullName" placeholder="Nama lengkap" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Username <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="addUsername" placeholder="username_unik" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Password <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="addPassword" placeholder="Min 6 karakter" required>
+              <button class="btn btn-outline-secondary" type="button" onclick="togglePwd('addPassword',this)"><i class="bi bi-eye"></i></button>
             </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Jabatan</label>
-              <select class="form-select" id="addJabatan" required>
-                <option value="" selected disabled>Pilih jabatan</option>
-                <option value="Kasir">Kasir</option>
-                <option value="Manager">Manager</option>
-                <option value="Koki">Koki</option>
-                <option value="Pramuniaga">Pramuniaga</option>
-                <option value="Cleaning Service">Cleaning Service</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Status</label>
-              <select class="form-select" id="addStatus" required>
-                <option value="Aktif" selected>Aktif</option>
-                <option value="Nonaktif">Nonaktif</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Tanggal Masuk</label>
-              <input type="date" class="form-control" id="addTanggalMasuk" required>
-            </div>
-          </form>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Role</label>
+            <select class="form-select" id="addRole">
+              <option value="kasir" selected>Kasir</option>
+              <option value="owner">Owner</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary rounded-pill px-4" onclick="simpanKaryawan()">Simpan
-            Karyawan</button>
+          <button type="button" class="btn btn-primary rounded-pill px-4" id="btnSaveKaryawan">Simpan</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Modal Edit Karyawan -->
-  <div class="modal fade" id="editKaryawanModal" tabindex="-1" aria-labelledby="editKaryawanModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="editKaryawanModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content shadow">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="editKaryawanModalLabel">Edit Data Karyawan</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title fw-bold">Edit Karyawan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="formEditKaryawan">
-            <input type="hidden" id="editId">
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Nama</label>
-              <input type="text" class="form-control" id="editNama" required>
+          <input type="hidden" id="editId">
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Nama Lengkap</label>
+            <input type="text" class="form-control" id="editFullName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Role</label>
+            <select class="form-select" id="editRole">
+              <option value="kasir">Kasir</option>
+              <option value="owner">Owner</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Status</label>
+            <select class="form-select" id="editIsActive">
+              <option value="1">Aktif</option>
+              <option value="0">Nonaktif</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Password Baru (opsional)</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="editPassword" placeholder="Kosongkan jika tidak ingin ubah">
+              <button class="btn btn-outline-secondary" type="button" onclick="togglePwd('editPassword',this)"><i class="bi bi-eye"></i></button>
             </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Jabatan</label>
-              <select class="form-select" id="editJabatan" required>
-                <option value="" disabled>Pilih jabatan</option>
-                <option value="Kasir">Kasir</option>
-                <option value="Manager">Manager</option>
-                <option value="Koki">Koki</option>
-                <option value="Pramuniaga">Pramuniaga</option>
-                <option value="Cleaning Service">Cleaning Service</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Status</label>
-              <select class="form-select" id="editStatus" required>
-                <option value="Aktif">Aktif</option>
-                <option value="Nonaktif">Nonaktif</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-medium text-secondary small text-uppercase">Tanggal Masuk</label>
-              <input type="date" class="form-control" id="editTanggalMasuk" required>
-            </div>
-          </form>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary rounded-pill px-4" onclick="updateKaryawan()">Simpan
-            Perubahan</button>
+          <button type="button" class="btn btn-primary rounded-pill px-4" id="btnUpdateKaryawan">Simpan Perubahan</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Sidebar Toggle
-    document.getElementById('sidebarToggle').addEventListener('click', function () {
+    const API = 'http://127.0.0.1:3001/api';
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    function showToast(msg, type = 'success') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el, { delay: 3000 }).show();
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, { headers: authHeaders(), ...opts });
+      if (res.status === 401) { localStorage.clear(); location.href = '../login.html'; return null; }
+      return res.json();
+    }
+
+    // ── Auth ─────────────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken() || user.role !== 'owner') { location.href = '../login.html'; }
+
+    document.getElementById('navName').textContent   = user.full_name || 'Owner';
+    document.getElementById('navAvatar').textContent = (user.full_name || 'OW').substring(0, 2).toUpperCase();
+    document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = '../login.html'; });
+
+    // Sidebar
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('show');
       document.getElementById('sidebarOverlay').classList.toggle('show');
     });
-    document.getElementById('sidebarOverlay').addEventListener('click', function () {
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
       document.getElementById('sidebar').classList.remove('show');
       document.getElementById('sidebarOverlay').classList.remove('show');
     });
 
-    // Modal instances
-    const addModalEl = document.getElementById('addKaryawanModal');
-    const editModalEl = document.getElementById('editKaryawanModal');
-    const addModal = new bootstrap.Modal(addModalEl);
-    const editModal = new bootstrap.Modal(editModalEl);
-
-    // Open Edit Modal
-    function openEditModal(id, nama, jabatan, status, tanggalMasuk) {
-      document.getElementById('editId').value = id;
-      document.getElementById('editNama').value = nama;
-      document.getElementById('editJabatan').value = jabatan;
-      document.getElementById('editStatus').value = status;
-      document.getElementById('editTanggalMasuk').value = tanggalMasuk;
-      editModal.show();
+    // ── Toggle password visibility ─────────────────────────────────────
+    function togglePwd(inputId, btn) {
+      const el = document.getElementById(inputId);
+      const isPass = el.type === 'password';
+      el.type = isPass ? 'text' : 'password';
+      btn.innerHTML = `<i class="bi bi-eye${isPass ? '-slash' : ''}"></i>`;
     }
 
-    // Delete Confirmation
-    function deleteKaryawan(nama) {
-      if (confirm('Apakah Anda yakin ingin menghapus data karyawan "' + nama + '"?')) {
-        alert('Data karyawan "' + nama + '" berhasil dihapus.');
-      }
+    // ── State ─────────────────────────────────────────────────────────────
+    let allKaryawan = [];
+
+    // ── Load Karyawan ─────────────────────────────────────────────────────
+    async function loadKaryawan() {
+      const data = await apiFetch('/users');
+      allKaryawan = data?.data || [];
+      renderTable();
     }
 
-    // Simpan Karyawan (dummy)
-    function simpanKaryawan() {
-      const nama = document.getElementById('addNama').value;
-      const jabatan = document.getElementById('addJabatan').value;
-      const status = document.getElementById('addStatus').value;
-      const tanggal = document.getElementById('addTanggalMasuk').value;
+    function renderTable() {
+      const q      = document.getElementById('searchKaryawan').value.toLowerCase();
+      const role   = document.getElementById('filterRole').value;
+      const status = document.getElementById('filterStatus').value;
 
-      if (!nama || !jabatan || !tanggal) {
-        alert('Harap lengkapi semua field yang wajib diisi.');
+      const filtered = allKaryawan.filter(k => {
+        const matchQ  = !q || k.full_name.toLowerCase().includes(q) || k.username.toLowerCase().includes(q);
+        const matchR  = !role || k.role === role;
+        const matchS  = status === '' || String(k.is_active) === status;
+        return matchQ && matchR && matchS;
+      });
+
+      const tbody = document.getElementById('karyawanTableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Karyawan tidak ditemukan</td></tr>';
         return;
       }
 
-      alert('Karyawan "' + nama + '" berhasil ditambahkan!');
-      document.getElementById('formAddKaryawan').reset();
-      addModal.hide();
+      const currentUserId = user.id;
+
+      tbody.innerHTML = filtered.map(k => {
+        const isMe    = k.id === currentUserId;
+        const active  = Number(k.is_active) === 1;
+        const roleBadge = k.role === 'owner'
+          ? '<span class="badge bg-primary-subtle text-primary rounded-pill">Owner</span>'
+          : '<span class="badge bg-secondary-subtle text-secondary rounded-pill">Kasir</span>';
+        const statusBadge = active
+          ? '<span class="badge bg-success-subtle text-success rounded-pill">Aktif</span>'
+          : '<span class="badge bg-danger-subtle text-danger rounded-pill">Nonaktif</span>';
+
+        return `<tr>
+          <td class="ps-4 fw-bold text-dark">${k.full_name}${isMe ? ' <span class="badge bg-info-subtle text-info rounded-pill small ms-1">Anda</span>' : ''}</td>
+          <td class="text-muted small">${k.username}</td>
+          <td>${roleBadge}</td>
+          <td>${statusBadge}</td>
+          <td class="text-muted small">${new Date(k.created_at).toLocaleDateString('id-ID')}</td>
+          <td class="text-end pe-4">
+            <button class="btn btn-sm btn-outline-secondary btn-action me-1" title="Edit" onclick="openEdit(${JSON.stringify(JSON.stringify(k))})"><i class="bi bi-pencil"></i></button>
+            ${!isMe ? `<button class="btn btn-sm btn-outline-danger btn-action" title="Hapus" onclick="deleteKaryawan(${k.id},'${k.full_name.replace(/'/g,"&#39;")}')"><i class="bi bi-trash"></i></button>` : ''}
+          </td>
+        </tr>`;
+      }).join('');
     }
 
-    // Update Karyawan (dummy)
-    function updateKaryawan() {
-      const id = document.getElementById('editId').value;
-      const nama = document.getElementById('editNama').value;
-      const jabatan = document.getElementById('editJabatan').value;
-      const status = document.getElementById('editStatus').value;
-      const tanggal = document.getElementById('editTanggalMasuk').value;
+    // Filter events
+    document.getElementById('searchKaryawan').addEventListener('input', renderTable);
+    document.getElementById('filterRole').addEventListener('change', renderTable);
+    document.getElementById('filterStatus').addEventListener('change', renderTable);
 
-      if (!nama || !jabatan || !tanggal) {
-        alert('Harap lengkapi semua field yang wajib diisi.');
-        return;
+    // ── Tambah Karyawan ───────────────────────────────────────────────────
+    document.getElementById('btnSaveKaryawan').addEventListener('click', async () => {
+      const full_name = document.getElementById('addFullName').value.trim();
+      const username  = document.getElementById('addUsername').value.trim();
+      const password  = document.getElementById('addPassword').value;
+      const role      = document.getElementById('addRole').value;
+
+      if (!full_name || !username || !password) { showToast('Lengkapi semua field wajib', 'warning'); return; }
+      if (password.length < 6) { showToast('Password minimal 6 karakter', 'warning'); return; }
+
+      const btn = document.getElementById('btnSaveKaryawan');
+      btn.disabled = true;
+      const res = await apiFetch('/users', {
+        method: 'POST',
+        body: JSON.stringify({ username, full_name, password, role }),
+      });
+      btn.disabled = false;
+
+      if (res?.status === 201) {
+        showToast('Karyawan berhasil ditambahkan', 'success');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('addKaryawanModal')).hide();
+        document.getElementById('addFullName').value = '';
+        document.getElementById('addUsername').value = '';
+        document.getElementById('addPassword').value = '';
+        loadKaryawan();
+      } else {
+        showToast(res?.message || 'Gagal menambah karyawan', 'danger');
       }
+    });
 
-      alert('Data karyawan "' + nama + '" berhasil diperbarui!');
-      editModal.hide();
+    // ── Edit Karyawan ─────────────────────────────────────────────────────
+    function openEdit(jsonStr) {
+      const k = JSON.parse(jsonStr);
+      document.getElementById('editId').value       = k.id;
+      document.getElementById('editFullName').value = k.full_name;
+      document.getElementById('editRole').value     = k.role;
+      document.getElementById('editIsActive').value = k.is_active;
+      document.getElementById('editPassword').value = '';
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('editKaryawanModal')).show();
     }
 
-    // Search Filter
-    document.getElementById('searchKaryawan').addEventListener('input', function () {
-      const keyword = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#karyawanTable tbody tr');
-      rows.forEach(row => {
-        const nama = row.cells[0].textContent.toLowerCase();
-        row.style.display = nama.includes(keyword) ? '' : 'none';
+    document.getElementById('btnUpdateKaryawan').addEventListener('click', async () => {
+      const id       = document.getElementById('editId').value;
+      const full_name = document.getElementById('editFullName').value.trim();
+      const role     = document.getElementById('editRole').value;
+      const is_active = Number(document.getElementById('editIsActive').value);
+      const password  = document.getElementById('editPassword').value;
+
+      if (!full_name) { showToast('Nama tidak boleh kosong', 'warning'); return; }
+      if (password && password.length < 6) { showToast('Password minimal 6 karakter', 'warning'); return; }
+
+      const payload = { full_name, role, is_active };
+      if (password) payload.password = password;
+
+      const btn = document.getElementById('btnUpdateKaryawan');
+      btn.disabled = true;
+      const res = await apiFetch(`/users/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
       });
+      btn.disabled = false;
+
+      if (res?.status === 200) {
+        showToast('Data karyawan berhasil diperbarui', 'success');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('editKaryawanModal')).hide();
+        loadKaryawan();
+      } else {
+        showToast(res?.message || 'Gagal update karyawan', 'danger');
+      }
     });
 
-    // Status Filter
-    document.getElementById('filterStatus').addEventListener('change', function () {
-      const status = this.value;
-      const rows = document.querySelectorAll('#karyawanTable tbody tr');
-      rows.forEach(row => {
-        const rowStatus = row.cells[2].textContent.trim();
-        row.style.display = (status === '' || rowStatus === status) ? '' : 'none';
-      });
-    });
+    // ── Hapus Karyawan ────────────────────────────────────────────────────
+    async function deleteKaryawan(id, name) {
+      if (!confirm(`Hapus karyawan "${name}"? Tindakan ini tidak dapat dibatalkan.`)) return;
+      const res = await apiFetch(`/users/${id}`, { method: 'DELETE' });
+      if (res?.status === 200) {
+        showToast('Karyawan berhasil dihapus', 'success');
+        loadKaryawan();
+      } else {
+        showToast(res?.message || 'Gagal menghapus', 'danger');
+      }
+    }
+
+    loadKaryawan();
   </script>
 </body>
-
 </html>

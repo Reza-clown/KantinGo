@@ -1,222 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KantinGO - POS Kasir Modern</title>
+  <title>KantinGO - POS Kasir</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
   <style>
-    body {
-      background: #f8fafc;
-      font-family: 'Inter', sans-serif;
-      color: #1e293b;
-    }
-
-    /* Top Navigation Styling */
-    .navbar-main {
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none !important;
-    }
-
-    .logo-icon {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, #0d6efd, #0dcaf0);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-    }
-
-    .nav-tabs-custom {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-tabs-custom a {
-      text-decoration: none;
-      color: #64748b;
-      font-weight: 500;
-      padding: 1.5rem 0;
-      display: block;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    .nav-tabs-custom a.active {
-      color: #0d6efd;
-    }
-
-    .nav-tabs-custom a.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: #0d6efd;
-    }
-
-    /* Product Card Styling */
-    .product-card {
-      background: white;
-      border: none;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      height: 100%;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    .product-img-container {
-      position: relative;
-      padding-top: 75%;
-      /* 4:3 Aspect Ratio */
-      background: #f1f5f9;
-    }
-
-    .product-img-container img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .stock-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      padding: 5px 12px;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .btn-add-cart {
-      border-radius: 12px;
-      padding: 10px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .cart-dot {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      width: 10px;
-      height: 10px;
-      border: 2px solid white;
-    }
-
-    /* Modal Customization */
-    .modal-content {
-      border-radius: 24px;
-      border: none;
-    }
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px 0;
-      border-bottom: 1px solid #f1f5f9;
-    }
-
-    /* Permanent Cart Sidebar (Desktop) */
-    .cart-sidebar {
-      background: white;
-      display: flex;
-      flex-direction: column;
-      border-radius: 24px;
-      border: 1px solid #e2e8f0;
-      padding: 24px;
-      height: calc(100vh - 120px);
-      position: sticky;
-      top: 100px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    }
-
-    .cart-items-list {
-      flex-grow: 1;
-      overflow-y: auto;
-      margin-bottom: 20px;
-    }
-
-    .search-bar {
-      max-width: 600px;
-      /* atau sesuai kebutuhan */
-      margin: 0 auto;
-      /* biar tetap center */
-    }
-
-
-    /* Sticky Bottom Cart (Mobile) */
-    @media (max-width: 991.98px) {
-      .cart-fixed-bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 1030;
-        background: white;
-        border-top: 1px solid #e2e8f0;
-        padding: 16px 24px;
-        border-radius: 24px 24px 0 0;
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      .main-pos-content {
-        padding-bottom: 100px;
-      }
-    }
-
-    .btn-checkout {
-      background-color: #10b981;
-      /* Hijau Sukses */
-      border: none;
-      color: white;
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      transition: background 0.2s;
-    }
-
-    .btn-checkout:hover {
-      background-color: #059669;
-    }
+    .product-card { cursor:pointer; transition:.15s; }
+    .product-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
+    .product-card.out-of-stock { opacity:.55; pointer-events:none; }
+    .cart-item-row { border-bottom:1px solid #f0f0f0; padding:.6rem 0; }
+    .qty-btn { width:28px; height:28px; padding:0; display:inline-flex; align-items:center; justify-content:center; }
+    #cartPanel { position:sticky; top:80px; }
   </style>
 </head>
-
 <body>
+
   <!-- Top Navigation -->
   <nav class="navbar-main">
     <div class="container-fluid px-4 py-0">
@@ -232,166 +36,512 @@
             <li><a href="manajemen-produk.html">Manajemen Produk</a></li>
           </ul>
         </div>
-        <div class="d-flex gap-3">
-          <button class="btn btn-light rounded-circle"><i class="bi bi-bell"></i></button>
-          <div class="btn btn-primary rounded-pill px-4 d-none d-md-block">Owner Account</div>
+        <div class="d-flex gap-3 align-items-center">
+          <a href="Admin/admin-dashboard.html" id="adminLink" class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0" style="background:#1a1a2e">
+            <i class="bi bi-shield-lock-fill text-primary"></i><span class="small fw-bold">Panel Admin</span>
+          </a>
+          <div class="dropdown">
+            <button class="btn btn-primary rounded-pill px-4 dropdown-toggle" data-bs-toggle="dropdown">
+              <span id="navUserName">Kasir</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="px-3 py-2 border-bottom">
+                <div class="fw-semibold small" id="navFullName"></div>
+                <div class="text-muted small" id="navRole"></div>
+              </li>
+              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
+              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </div>
         </div>
-
       </div>
     </div>
   </nav>
 
   <main class="container-fluid px-4 py-4">
     <div class="row g-4">
-      <!-- Kolom Produk (Grid) -->
-      <div class="col-lg-9 main-pos-content">
-        <!-- Search Bar -->
-        <div class="row mb-3">
-          <div class="col-lg-12">
-            <div class="input-group shadow-sm rounded-pill overflow-hidden border-0">
-              <span class="input-group-text bg-white border-0 ps-4">
-                <i class="bi bi-search text-muted"></i>
-              </span>
-              <input type="text" class="form-control border-0 py-3" placeholder="Cari menu favorit di sini...">
-            </div>
-          </div>
+
+      <!-- Produk Grid -->
+      <div class="col-lg-8">
+        <!-- Search -->
+        <div class="input-group shadow-sm rounded-pill overflow-hidden border-0 mb-3">
+          <span class="input-group-text bg-white border-0 ps-4"><i class="bi bi-search text-muted"></i></span>
+          <input type="text" class="form-control border-0 py-3" id="searchProduct" placeholder="Cari menu...">
         </div>
 
-
-        <!-- Filter Categories (Sekarang di bawah Search) -->
-        <div class="d-flex gap-2 overflow-x-auto pb-3 mb-4">
-          <button class="btn btn-primary rounded-pill px-4">Semua Menu</button>
-          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Makanan Berat</button>
-          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Minuman Dingin</button>
-          <button class="btn btn-white bg-white border rounded-pill px-4 shadow-sm">Camilan / Snack</button>
+        <!-- Kategori Filter -->
+        <div class="d-flex gap-2 overflow-x-auto pb-3 mb-4" id="categoryFilters">
+          <button class="btn btn-primary rounded-pill px-4 flex-shrink-0" data-cat="">Semua Menu</button>
         </div>
 
-        <!-- Template Produk (disusun 2 baris) -->
-        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3">
-
-          <div class="col">
-            <div class="product-card">
-              <div class="product-img-container">
-                <img src="https://images.unsplash.com/photo-1512058560566-4334670a1c10?w=400" alt="Nasi Goreng">
-                <span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i> Stok:
-                  42</span>
-              </div>
-              <div class="p-3 text-center">
-                <h6 class="fw-bold mb-1 text-truncate">Nasi Goreng Spesial</h6>
-                <p class="text-primary fw-bold mb-3">Rp 15.000</p>
-                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
-                  Tambah</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="product-card">
-              <div class="product-img-container">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Salad">
-                <span class="stock-badge bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill me-1"></i> Sisa
-                  5</span>
-              </div>
-              <div class="p-3 text-center">
-                <h6 class="fw-bold mb-1 text-truncate">Ayam Geprek Bento</h6>
-                <p class="text-primary fw-bold mb-3">Rp 23.000</p>
-                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
-                  Tambah</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="product-card opacity-75">
-              <div class="product-img-container">
-                <img src="https://images.unsplash.com/photo-1544145945-f904253d0c71?w=400" alt="Kopi">
-                <span class="stock-badge bg-danger text-white"><i class="bi bi-x-circle-fill me-1"></i> Habis</span>
-              </div>
-              <div class="p-3 text-center">
-                <h6 class="fw-bold mb-1 text-truncate">Es Kopi Gula Aren</h6>
-                <p class="text-primary fw-bold mb-3">Rp 12.000</p>
-                <button class="btn btn-secondary btn-add-cart w-100" disabled>Habis</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="product-card">
-              <div class="product-img-container">
-                <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400" alt="Mie">
-                <span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i> Stok:
-                  18</span>
-              </div>
-              <div class="p-3 text-center">
-                <h6 class="fw-bold mb-1 text-truncate">Mie Ayam Spesial</h6>
-                <p class="text-primary fw-bold mb-3">Rp 17.000</p>
-                <button class="btn btn-outline-primary btn-add-cart w-100"><i class="bi bi-plus-lg me-1"></i>
-                  Tambah</button>
-              </div>
-            </div>
+        <!-- Produk Cards -->
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3" id="productGrid">
+          <div class="col-12 text-center text-muted py-5">
+            <div class="spinner-border"></div><div class="mt-2">Memuat produk...</div>
           </div>
         </div>
-
-
-
       </div>
 
-      <!-- Kolom Keranjang (Sidebar Permanen di Desktop) -->
-      <div class="col-lg-3 d-none d-lg-block">
-        <div class="cart-sidebar">
+      <!-- Keranjang Desktop -->
+      <div class="col-lg-4 d-none d-lg-block">
+        <div id="cartPanel" class="cart-sidebar">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-bold m-0"><i class="bi bi-cart3 me-2"></i>Pesanan</h5>
-            <button class="btn btn-sm btn-light rounded-pill text-danger">Kosongkan</button>
+            <button class="btn btn-sm btn-light rounded-pill text-danger" id="btnClearCart">Kosongkan</button>
           </div>
-
-          <div class="cart-items-list">
-            <div class="cart-item">
-              <div class="flex-grow-1">
-                <div class="fw-semibold">Nasi Goreng Spesial</div>
-                <div class="small text-muted">Rp 15.000 x 2</div>
-              </div>
-              <div class="fw-bold text-dark">Rp 30.000</div>
-            </div>
-            <div class="cart-item">
-              <div class="flex-grow-1">
-                <div class="fw-semibold">Es Teh Manis</div>
-                <div class="small text-muted">Rp 5.000 x 1</div>
-              </div>
-              <div class="fw-bold text-dark">Rp 5.000</div>
-            </div>
+          <div id="cartItems" class="cart-items-list"></div>
+          <div id="cartEmpty" class="text-center text-muted py-4">
+            <i class="bi bi-cart-x fs-2 d-block mb-2"></i>Belum ada item
           </div>
-
-          <div class="pt-4 border-top">
-            <div class="d-flex justify-content-between mb-2">
+          <div class="pt-3 border-top" id="cartSummary" style="display:none">
+            <div class="mb-2">
+              <label class="small fw-bold text-secondary">Diskon (Rp)</label>
+              <input type="number" class="form-control form-control-sm" id="discountInput" value="0" min="0">
+            </div>
+            <div class="mb-2">
+              <label class="small fw-bold text-secondary">Metode Bayar</label>
+              <select class="form-select form-select-sm" id="paymentMethod">
+                <option value="tunai">Tunai</option>
+                <option value="qris">QRIS</option>
+                <option value="transfer">Transfer</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="d-flex justify-content-between my-3">
               <span class="text-muted">Subtotal</span>
-              <span class="fw-bold">Rp 35.000</span>
+              <span class="fw-bold" id="subtotalDisplay">Rp 0</span>
             </div>
             <div class="d-flex justify-content-between mb-4">
-              <span class="h5 fw-bold m-0">Total Harga</span>
-              <span class="h5 fw-bold text-primary m-0">Rp 35.000</span>
+              <span class="h5 fw-bold m-0">Total</span>
+              <span class="h5 fw-bold text-primary m-0" id="totalDisplay">Rp 0</span>
             </div>
-            <button class="btn-checkout w-100">
+            <button class="btn-checkout w-100" id="btnCheckout">
               Checkout Sekarang <i class="bi bi-arrow-right ms-2"></i>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Panel Keranjang Bawah (Hanya muncul di Mobile) -->
-      <div class="d-lg-none cart-fixed-bottom">
+      <!-- Keranjang Mobile (Bottom Bar) -->
+      <div class="d-lg-none cart-fixed-bottom" id="mobileCartBar" style="display:none!important">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <div class="small text-muted">3 item terpilih</div>
-            <div class="h5 fw-bold text-primary mb-0">Rp 35.000</div>
+            <div class="small text-muted" id="mobileCartCount">0 item</div>
+            <div class="h5 fw-bold text-primary mb-0" id="mobileCartTotal">Rp 0</div>
           </div>
-          <button class="btn btn-success rounded-pill px-4 py-2 fw-bold">
+          <button class="btn btn-success rounded-pill px-4 py-2 fw-bold" id="btnMobileCheckout">
             Checkout <i class="bi bi-arrow-right ms-1"></i>
           </button>
         </div>
       </div>
     </div>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+  <!-- Modal Checkout Konfirmasi -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">Konfirmasi Checkout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="checkoutSummaryBody"></div>
+        <div class="modal-footer">
+          <button class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-success rounded-pill px-4 fw-bold" id="btnConfirmCheckout">
+            <i class="bi bi-check2-circle me-1"></i>Bayar & Selesai
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Struk Sukses -->
+  <div class="modal fade" id="receiptModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold text-success"><i class="bi bi-check-circle-fill me-2"></i>Transaksi Berhasil!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="receiptBody"></div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal" id="btnNewOrder">
+            <i class="bi bi-plus-lg me-1"></i>Transaksi Baru
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Riwayat Transaksi -->
+  <div class="modal fade" id="historyModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold"><i class="bi bi-clock-history me-2"></i>Riwayat Transaksi Hari Ini</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-3">Kode</th>
+                  <th>Waktu</th>
+                  <th>Total</th>
+                  <th>Metode</th>
+                  <th>Status</th>
+                  <th class="pe-3">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody">
+                <tr><td colspan="6" class="text-center py-3 text-muted">Memuat...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API = 'http://127.0.0.1:3001/api';
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    function showToast(msg, type = 'success') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el, { delay: 3000 }).show();
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, { headers: authHeaders(), ...opts });
+      if (res.status === 401) { localStorage.clear(); location.href = 'login.html'; return null; }
+      return res.json();
+    }
+
+    function formatRp(n) { return 'Rp ' + Number(n).toLocaleString('id-ID'); }
+
+    // ── Auth check ───────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken()) { location.href = 'login.html'; }
+    document.getElementById('navUserName').textContent = user.full_name || user.username || 'Kasir';
+    document.getElementById('navFullName').textContent = user.full_name || '-';
+    document.getElementById('navRole').textContent     = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
+    document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = 'login.html'; });
+    if (user.role === 'owner') {
+      document.getElementById('adminLink').classList.replace('d-none', 'd-flex');
+      document.getElementById('adminMenuItem').style.display = '';
+    }
+
+    // ── State ─────────────────────────────────────────────────────────────
+    let allProducts = [];
+    let cart = []; // [{ product, qty }]
+    let activeCat = '';
+
+    // ── Load Kategori ─────────────────────────────────────────────────────
+    async function loadCategories() {
+      const data = await apiFetch('/categories');
+      const catBar = document.getElementById('categoryFilters');
+      (data?.data || []).forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-light border rounded-pill px-4 flex-shrink-0';
+        btn.dataset.cat = cat.id;
+        btn.textContent = cat.name;
+        btn.addEventListener('click', () => filterByCategory(cat.id, btn));
+        catBar.appendChild(btn);
+      });
+    }
+
+    function filterByCategory(catId, clickedBtn) {
+      activeCat = catId || '';
+      document.querySelectorAll('#categoryFilters button').forEach(b => {
+        b.className = 'btn border rounded-pill px-4 flex-shrink-0 ' + (b === clickedBtn ? 'btn-primary' : 'btn-light');
+      });
+      renderProducts();
+    }
+
+    // ── Load Produk ───────────────────────────────────────────────────────
+    async function loadProducts() {
+      const data = await apiFetch('/products?limit=200');
+      allProducts = data?.data || [];
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const q   = document.getElementById('searchProduct').value.toLowerCase();
+      const grid = document.getElementById('productGrid');
+
+      let filtered = allProducts.filter(p => {
+        const matchQ   = !q || p.name.toLowerCase().includes(q);
+        const matchCat = !activeCat || String(p.category_id) === String(activeCat);
+        return matchQ && matchCat;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="col-12 text-center text-muted py-5"><i class="bi bi-search fs-2 d-block mb-2"></i>Produk tidak ditemukan</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const isOut = Number(p.stock) <= 0 || p.status === 'habis';
+        const stockBadge = isOut
+          ? `<span class="stock-badge bg-danger text-white"><i class="bi bi-x-circle-fill me-1"></i>Habis</span>`
+          : Number(p.stock) <= 5
+            ? `<span class="stock-badge bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill me-1"></i>Sisa ${p.stock}</span>`
+            : `<span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i>Stok: ${p.stock}</span>`;
+
+        const imgSrc = p.image_url || 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(p.name);
+
+        return `
+          <div class="col">
+            <div class="product-card ${isOut ? 'out-of-stock' : ''}" onclick="addToCart(${p.id})">
+              <div class="product-img-container">
+                <img src="${imgSrc}" alt="${p.name}" loading="lazy">
+                ${stockBadge}
+              </div>
+              <div class="p-3 text-center">
+                <h6 class="fw-bold mb-1 text-truncate" title="${p.name}">${p.name}</h6>
+                <p class="text-primary fw-bold mb-3">${formatRp(p.price)}</p>
+                <button class="btn btn-outline-primary btn-add-cart w-100 ${isOut ? 'disabled' : ''}" onclick="event.stopPropagation(); addToCart(${p.id})">
+                  <i class="bi bi-plus-lg me-1"></i>Tambah
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    document.getElementById('searchProduct').addEventListener('input', renderProducts);
+
+    // ── Keranjang ─────────────────────────────────────────────────────────
+    function addToCart(productId) {
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) return;
+      if (Number(product.stock) <= 0) return;
+
+      const existing = cart.find(c => c.product.id === productId);
+      if (existing) {
+        if (existing.qty >= Number(product.stock)) {
+          showToast(`Stok ${product.name} hanya ${product.stock}`, 'warning');
+          return;
+        }
+        existing.qty++;
+      } else {
+        cart.push({ product, qty: 1 });
+      }
+      renderCart();
+      showToast(`${product.name} ditambahkan`, 'success');
+    }
+
+    function changeQty(productId, delta) {
+      const idx = cart.findIndex(c => c.product.id === productId);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      renderCart();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(c => c.product.id !== productId);
+      renderCart();
+    }
+
+    document.getElementById('btnClearCart').addEventListener('click', () => { cart = []; renderCart(); });
+
+    function calcSubtotal() { return cart.reduce((s, c) => s + c.product.price * c.qty, 0); }
+    function calcTotal() {
+      const disc = Number(document.getElementById('discountInput').value) || 0;
+      return Math.max(0, calcSubtotal() - disc);
+    }
+
+    function renderCart() {
+      const cartItemsEl  = document.getElementById('cartItems');
+      const cartEmptyEl  = document.getElementById('cartEmpty');
+      const cartSummaryEl= document.getElementById('cartSummary');
+
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = '';
+        cartEmptyEl.style.display = '';
+        cartSummaryEl.style.display = 'none';
+        document.getElementById('mobileCartBar').style.removeProperty('display');
+        document.getElementById('mobileCartBar').style.display = 'none';
+        return;
+      }
+
+      cartEmptyEl.style.display = 'none';
+      cartSummaryEl.style.display = '';
+
+      cartItemsEl.innerHTML = cart.map(c => `
+        <div class="cart-item-row d-flex align-items-center gap-2">
+          <div class="flex-grow-1">
+            <div class="fw-semibold small text-truncate" style="max-width:140px">${c.product.name}</div>
+            <div class="small text-muted">${formatRp(c.product.price)}</div>
+          </div>
+          <div class="d-flex align-items-center gap-1">
+            <button class="btn btn-light btn-sm qty-btn border" onclick="changeQty(${c.product.id}, -1)"><i class="bi bi-dash"></i></button>
+            <span class="fw-bold small mx-1">${c.qty}</span>
+            <button class="btn btn-light btn-sm qty-btn border" onclick="changeQty(${c.product.id}, 1)"><i class="bi bi-plus"></i></button>
+          </div>
+          <div class="fw-bold small text-end" style="min-width:64px">${formatRp(c.product.price * c.qty)}</div>
+          <button class="btn btn-sm text-danger p-0 ms-1" onclick="removeFromCart(${c.product.id})"><i class="bi bi-x-lg"></i></button>
+        </div>`).join('');
+
+      const sub   = calcSubtotal();
+      const total = calcTotal();
+      document.getElementById('subtotalDisplay').textContent = formatRp(sub);
+      document.getElementById('totalDisplay').textContent    = formatRp(total);
+
+      // Mobile bar
+      const totalItems = cart.reduce((s, c) => s + c.qty, 0);
+      document.getElementById('mobileCartBar').style.display = '';
+      document.getElementById('mobileCartCount').textContent = `${totalItems} item`;
+      document.getElementById('mobileCartTotal').textContent = formatRp(total);
+    }
+
+    document.getElementById('discountInput').addEventListener('input', renderCart);
+
+    // ── Checkout ──────────────────────────────────────────────────────────
+    function openCheckout() {
+      if (cart.length === 0) { showToast('Keranjang masih kosong', 'warning'); return; }
+      const method = document.getElementById('paymentMethod').value;
+      const disc   = Number(document.getElementById('discountInput').value) || 0;
+      const body   = document.getElementById('checkoutSummaryBody');
+      body.innerHTML = `
+        <div class="table-responsive mb-3">
+          <table class="table table-sm">
+            <thead><tr><th>Item</th><th class="text-center">Qty</th><th class="text-end">Harga</th></tr></thead>
+            <tbody>
+              ${cart.map(c => `<tr>
+                <td>${c.product.name}</td>
+                <td class="text-center">${c.qty}</td>
+                <td class="text-end">${formatRp(c.product.price * c.qty)}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between"><span>Subtotal</span><strong>${formatRp(calcSubtotal())}</strong></div>
+        ${disc > 0 ? `<div class="d-flex justify-content-between text-danger"><span>Diskon</span><strong>-${formatRp(disc)}</strong></div>` : ''}
+        <div class="d-flex justify-content-between fs-5 fw-bold mt-2 pt-2 border-top">
+          <span>Total</span><span class="text-primary">${formatRp(calcTotal())}</span>
+        </div>
+        <div class="mt-3 p-2 bg-light rounded"><span class="text-muted small">Metode:</span> <strong>${method.toUpperCase()}</strong></div>`;
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('checkoutModal')).show();
+    }
+
+    document.getElementById('btnCheckout').addEventListener('click', openCheckout);
+    document.getElementById('btnMobileCheckout').addEventListener('click', openCheckout);
+
+    document.getElementById('btnConfirmCheckout').addEventListener('click', async () => {
+      const btnConfirm = document.getElementById('btnConfirmCheckout');
+      btnConfirm.disabled = true;
+      btnConfirm.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Memproses...';
+
+      const payload = {
+        payment_method: document.getElementById('paymentMethod').value,
+        discount_amount: Number(document.getElementById('discountInput').value) || 0,
+        items: cart.map(c => ({ product_id: c.product.id, qty: c.qty })),
+      };
+
+      const res = await apiFetch('/orders', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      btnConfirm.disabled = false;
+      btnConfirm.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Bayar & Selesai';
+
+      if (!res) return;
+
+      if (res.status === 201) {
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('checkoutModal')).hide();
+        showReceipt(res.data);
+        // Reset cart & reload produk (stok berkurang)
+        cart = [];
+        renderCart();
+        document.getElementById('discountInput').value = 0;
+        loadProducts();
+      } else {
+        showToast(res.message || 'Checkout gagal', 'danger');
+      }
+    });
+
+    function showReceipt(data) {
+      document.getElementById('receiptBody').innerHTML = `
+        <div class="text-center mb-3">
+          <div class="fw-bold fs-5">${data.order_code}</div>
+          <div class="text-muted small">${new Date().toLocaleString('id-ID')}</div>
+        </div>
+        <div class="d-flex justify-content-between fs-5 fw-bold p-3 bg-success-subtle rounded">
+          <span>Total Dibayar</span><span class="text-success">${formatRp(data.total)}</span>
+        </div>`;
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('receiptModal')).show();
+    }
+
+    // ── Riwayat Transaksi ─────────────────────────────────────────────────
+    async function loadHistory() {
+      const today = new Date().toISOString().slice(0, 10);
+      const data  = await apiFetch(`/orders?limit=50&from=${today}`);
+      const tbody = document.getElementById('historyBody');
+      if (!data?.data?.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-3 text-muted">Belum ada transaksi hari ini</td></tr>';
+        return;
+      }
+      const sMap = { paid:'success', unpaid:'warning', cancelled:'danger' };
+      tbody.innerHTML = data.data.map(o => `
+        <tr>
+          <td class="ps-3 fw-medium small">${o.order_code}</td>
+          <td class="small text-muted">${new Date(o.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</td>
+          <td class="fw-bold">${formatRp(o.total)}</td>
+          <td><span class="badge bg-light text-dark border rounded-pill">${o.payment_method}</span></td>
+          <td><span class="badge bg-${sMap[o.order_status]}-subtle text-${sMap[o.order_status]} rounded-pill">${o.order_status}</span></td>
+          <td class="pe-3">
+            ${o.order_status !== 'paid' ? `<button class="btn btn-xs btn-success btn-sm me-1 py-0" onclick="updateStatus(${o.id},'paid')">Lunas</button>` : ''}
+            ${o.order_status !== 'cancelled' ? `<button class="btn btn-xs btn-outline-danger btn-sm py-0" onclick="updateStatus(${o.id},'cancelled')">Batal</button>` : ''}
+          </td>
+        </tr>`).join('');
+    }
+
+    async function updateStatus(orderId, status) {
+      const res = await apiFetch(`/orders/${orderId}/status`, {
+        method: 'PATCH',
+        body: JSON.stringify({ order_status: status }),
+      });
+      if (res?.status === 200) {
+        showToast('Status diperbarui', 'success');
+        loadHistory();
+      } else {
+        showToast(res?.message || 'Gagal update status', 'danger');
+      }
+    }
+
+    // Tambah tombol riwayat di navbar
+    document.querySelector('.cart-sidebar .d-flex.justify-content-between').insertAdjacentHTML('beforeend',
+      '<button class="btn btn-sm btn-outline-secondary rounded-pill ms-1" data-bs-toggle="modal" data-bs-target="#historyModal" onclick="loadHistory()"><i class="bi bi-clock-history"></i></button>'
+    );
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    loadCategories();
+    loadProducts();
+    renderCart();
+  </script>
+</body>
 </html>

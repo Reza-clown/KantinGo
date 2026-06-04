@@ -1,24 +1,22 @@
 <!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KantinGO - Laporan & Statistik</title>
-    <!-- Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="admin-dashboard.css">
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KantinGO - Laporan Transaksi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../global.css">
+</head>
+<body>
 
   <!-- Sidebar -->
   <nav id="sidebar" class="sidebar">
     <div class="sidebar-header">
-      <a href="dashboard.html" class="navbar-logo">
+      <a href="../dashboard.html" class="navbar-logo">
         <div class="logo-icon"><i class="bi bi-shop-window"></i></div>
         <div class="fw-bold fs-4 text-light mb-0">Kantin<span class="text-primary">GO</span></div>
       </a>
@@ -29,39 +27,43 @@
       <li><a href="manajemen-dashboard.html"><i class="bi bi-people"></i> Manajemen Karyawan</a></li>
       <li class="active"><a href="report.html"><i class="bi bi-receipt"></i> Laporan Transaksi</a></li>
       <li><a href="pengaturan-sistem.html"><i class="bi bi-gear"></i> Pengaturan Sistem</a></li>
+      <li class="mt-2 pt-2" style="border-top:1px solid rgba(255,255,255,.1)">
+        <a href="../pos-kasir.html"><i class="bi bi-cart3"></i> POS Kasir</a>
+      </li>
+      <li><a href="../dashboard.html"><i class="bi bi-house"></i> Dashboard Kasir</a></li>
     </ul>
   </nav>
-
-  <!-- Mobile Overlay -->
   <div id="sidebarOverlay" class="sidebar-overlay d-lg-none"></div>
 
-  <!-- Top Navbar -->
+  <!-- Navbar -->
   <nav class="navbar top-navbar fixed-top px-4">
     <div class="container-fluid">
       <div class="d-flex align-items-center gap-4">
-        <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle">
-          <i class="bi bi-list fs-4"></i>
-        </button>
+        <button class="btn btn-link text-dark p-0 d-lg-none" id="sidebarToggle"><i class="bi bi-list fs-4"></i></button>
         <span class="navbar-brand d-none d-lg-block m-0">Admin Panel</span>
-        <!-- Main Navigation Links -->
-        <div class="d-none d-xl-flex gap-3 ms-4 border-start ps-4">
-          <a href="../dashboard.html" class="text-decoration-none text-muted fw-medium small">Dashboard Owner</a>
-          <a href="../pos-kasir.html" class="text-decoration-none text-muted fw-medium small">POS Kasir</a>
-          <a href="../manajemen-produk.html" class="text-decoration-none text-muted fw-medium small">Manajemen Produk</a>
-          <a href="admin-dashboard.html" class="text-decoration-none text-primary fw-bold small">Admin</a>
-        </div>
       </div>
       <div class="ms-auto d-flex align-items-center gap-3">
+        <!-- Filter Periode -->
+        <div class="d-none d-md-flex align-items-center gap-2">
+          <select class="form-select form-select-sm" id="filterMonth" style="width:120px">
+            <option value="1">Januari</option><option value="2">Februari</option>
+            <option value="3">Maret</option><option value="4">April</option>
+            <option value="5">Mei</option><option value="6">Juni</option>
+            <option value="7">Juli</option><option value="8">Agustus</option>
+            <option value="9">September</option><option value="10">Oktober</option>
+            <option value="11">November</option><option value="12">Desember</option>
+          </select>
+          <select class="form-select form-select-sm" id="filterYear" style="width:90px"></select>
+          <button class="btn btn-sm btn-primary" id="btnLoad"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
         <div class="dropdown">
-          <button class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="avatar-circle">AD</div>
-            <span class="d-none d-md-block fw-medium">Admin User</span>
+          <button class="btn btn-link text-dark text-decoration-none p-0 d-flex align-items-center gap-2 dropdown-toggle"
+            type="button" data-bs-toggle="dropdown">
+            <div class="avatar-circle" id="navAvatar">OW</div>
+            <span class="d-none d-md-block fw-medium" id="navName">Owner</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+            <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
           </ul>
         </div>
       </div>
@@ -70,211 +72,395 @@
 
   <!-- Main Content -->
   <div class="main-content">
-
     <div class="container-fluid py-4 px-5">
 
-      <!-- Header -->
-      <div class="mb-5">
-        <h2 class="fw-bold m-0 page-title">Laporan Transaksi</h2>
-        <p class="text-muted m-0">Analisis omzet dan riwayat penjualan KantinGO.</p>
+      <div class="d-flex justify-content-between align-items-start mb-5 flex-wrap gap-3">
+        <div>
+          <h2 class="fw-bold m-0">Laporan Transaksi</h2>
+          <p class="text-muted m-0" id="periodeLabel">Memuat data...</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-success fw-medium" id="btnExportExcel">
+            <i class="bi bi-file-earmark-excel me-1"></i>Export Excel
+          </button>
+          <button class="btn btn-outline-secondary fw-medium" id="btnExportCSV">
+            <i class="bi bi-file-earmark-text me-1"></i>Export CSV
+          </button>
+        </div>
       </div>
 
       <!-- Stat Cards -->
       <div class="row g-4 mb-5">
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-3 col-md-6">
           <div class="card card-stat shadow-sm p-4 h-100">
-            <div class="d-flex justify-content-between align-items-start">
-              <div class="icon-box bg-success-subtle text-success">
-                <i class="bi bi-currency-dollar"></i>
-              </div>
-              <i class="bi bi-graph-up-arrow text-success"></i>
-            </div>
-            <p class="text-muted mt-3 mb-1">Total Penjualan</p>
-            <h3 class="fw-bold m-0">Rp 12.500.000</h3>
-            <small class="text-success fw-medium">+15.2% <span class="text-muted fw-normal">bulan ini</span></small>
+            <div class="icon-box bg-success-subtle text-success mb-3"><i class="bi bi-currency-dollar"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Total Omzet</p>
+            <h3 class="fw-bold m-0 text-success" id="statOmzet">—</h3>
           </div>
         </div>
-
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-3 col-md-6">
           <div class="card card-stat shadow-sm p-4 h-100">
-            <div class="d-flex justify-content-between align-items-start">
-              <div class="icon-box bg-primary-subtle text-primary">
-                <i class="bi bi-cart3"></i>
-              </div>
-              <i class="bi bi-graph-up-arrow text-primary"></i>
-            </div>
-            <p class="text-muted mt-3 mb-1">Total Transaksi</p>
-            <h3 class="fw-bold m-0">1.248</h3>
-            <small class="text-primary fw-medium">+8.7% <span class="text-muted fw-normal">bulan ini</span></small>
+            <div class="icon-box bg-primary-subtle text-primary mb-3"><i class="bi bi-cart3"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Jumlah Transaksi</p>
+            <h3 class="fw-bold m-0 text-primary" id="statTransaksi">—</h3>
           </div>
         </div>
-
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-3 col-md-6">
           <div class="card card-stat shadow-sm p-4 h-100">
-            <div class="d-flex justify-content-between align-items-start">
-              <div class="icon-box bg-purple-subtle" style="background-color: #f3e8ff; color: #9333ea;">
-                <i class="bi bi-receipt"></i>
-              </div>
-              <i class="bi bi-graph-up-arrow" style="color: #c084fc;"></i>
-            </div>
-            <p class="text-muted mt-3 mb-1">Rata-rata per Transaksi</p>
-            <h3 class="fw-bold m-0">Rp 10.016</h3>
-            <small style="color: #a855f7;">+3.4% <span class="text-muted fw-normal">bulan ini</span></small>
+            <div class="icon-box bg-warning-subtle text-warning mb-3"><i class="bi bi-check-circle"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Transaksi Lunas</p>
+            <h3 class="fw-bold m-0 text-warning" id="statLunas">—</h3>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stat shadow-sm p-4 h-100">
+            <div class="icon-box bg-danger-subtle text-danger mb-3"><i class="bi bi-x-circle"></i></div>
+            <p class="text-muted mb-1 fw-medium small text-uppercase">Transaksi Batal</p>
+            <h3 class="fw-bold m-0 text-danger" id="statBatal">—</h3>
           </div>
         </div>
       </div>
 
-      <!-- Omzet Chart -->
-      <div class="card table-card shadow-sm mb-5 p-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h5 class="fw-bold m-0">Tren Omzet Penjualan</h5>
-          <select class="form-select form-select-sm w-auto">
-            <option>Harian</option>
-            <option selected>Mingguan</option>
-            <option>Bulanan</option>
-          </select>
-        </div>
-        <div class="chart-container">
-          <canvas id="revenueChart"></canvas>
+      <!-- Produk Terlaris -->
+      <div class="card shadow-sm p-4 mb-5">
+        <h5 class="fw-bold mb-4"><i class="bi bi-trophy-fill text-warning me-2"></i>Produk Terlaris Bulan Ini</h5>
+        <div id="topProductsContainer">
+          <div class="text-center text-muted py-3"><div class="spinner-border spinner-border-sm me-2"></div>Memuat...</div>
         </div>
       </div>
 
-      <!-- Filter Card -->
-      <div class="card filter-card shadow-sm mb-4 p-3">
-        <form class="row g-3 align-items-end">
-          <div class="col-md-2">
-            <label class="form-label fw-medium text-secondary small text-uppercase">Pilih Tanggal</label>
-            <input type="date" class="form-control">
+      <!-- Filter Tabel Transaksi -->
+      <div class="card shadow-sm p-3 mb-4">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Status</label>
+            <select class="form-select" id="filterStatus">
+              <option value="">Semua Status</option>
+              <option value="paid">Lunas</option>
+              <option value="unpaid">Belum Bayar</option>
+              <option value="cancelled">Dibatalkan</option>
+            </select>
           </div>
-          <div class="col-md-2">
-            <label class="form-label fw-medium text-secondary small text-uppercase">Kasir</label>
-            <select class="form-select">
-              <option selected>Semua Kasir</option>
-              <option>Budi Santoso</option>
-              <option>Siti Aminah</option>
-              <option>Ahmad Rizki</option>
+          <div class="col-md-3">
+            <label class="form-label fw-medium small text-uppercase text-secondary">Metode Bayar</label>
+            <select class="form-select" id="filterPayment">
+              <option value="">Semua Metode</option>
+              <option value="tunai">Tunai</option>
+              <option value="qris">QRIS</option>
+              <option value="transfer">Transfer</option>
+              <option value="lainnya">Lainnya</option>
             </select>
           </div>
           <div class="col-md-2">
-            <label class="form-label fw-medium text-secondary small text-uppercase">Kategori Produk</label>
-            <select class="form-select">
-              <option selected>Semua Kategori</option>
-              <option>Makanan Berat</option>
-              <option>Minuman</option>
-              <option>Camilan</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label class="form-label fw-medium text-secondary small text-uppercase">Metode Bayar</label>
-            <select class="form-select">
-              <option selected>Semua Metode</option>
-              <option>Tunai</option>
-              <option>QRIS</option>
-              <option>Debit</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100 fw-medium" style="border-radius: 10px; padding: 0.6rem 1rem;">
-              <i class="bi bi-funnel me-2"></i> Tampilkan Data
+            <button class="btn btn-primary w-100" onclick="loadTransactions()">
+              <i class="bi bi-funnel me-1"></i>Filter
             </button>
           </div>
-          <div class="col-md-2">
-            <div class="dropdown">
-              <button class="btn btn-outline-secondary w-100 fw-medium dropdown-toggle" type="button" data-bs-toggle="dropdown" style="border-radius: 10px; padding: 0.6rem 1rem;">
-                <i class="bi bi-download me-2"></i> Export
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li><a class="dropdown-item py-2" href="#"><i class="bi bi-file-earmark-pdf text-danger me-2"></i> Export PDF</a></li>
-                <li><a class="dropdown-item py-2" href="#"><i class="bi bi-file-earmark-spreadsheet text-success me-2"></i> Export CSV</a></li>
-              </ul>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
 
-      <!-- Report Table -->
-      <div class="card table-card shadow-sm">
+      <!-- Tabel Transaksi -->
+      <div class="card table-container shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="fw-bold m-0">Detail Transaksi</h5>
+          <span class="text-muted small" id="txCountLabel"></span>
+        </div>
         <div class="table-responsive">
-          <table class="table table-hover align-middle mb-0">
+          <table class="table table-hover align-middle">
             <thead>
               <tr>
-                <th class="ps-4">Waktu</th>
+                <th>Kode Order</th>
+                <th>Waktu</th>
                 <th>Kasir</th>
-                <th>Produk</th>
-                <th class="text-center">Jumlah</th>
-                <th class="text-end">Total Harga</th>
-                <th class="text-center">Metode Pembayaran</th>
+                <th>Total</th>
+                <th>Diskon</th>
+                <th>Metode</th>
+                <th>Status</th>
+                <th>Aksi</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="ps-4 text-muted">14:32</td>
-                <td class="fw-bold text-dark">Budi Santoso</td>
-                <td>Nasi Goreng Spesial</td>
-                <td class="text-center">3</td>
-                <td class="text-end fw-medium">Rp 54.000</td>
-                <td class="text-center"><span class="badge bg-light text-primary border border-primary-subtle rounded-pill">QRIS</span></td>
-              </tr>
-              <tr>
-                <td class="ps-4 text-muted">14:28</td>
-                <td class="fw-bold text-dark">Siti Aminah</td>
-                <td>Ayam Penyet + Es Teh</td>
-                <td class="text-center">2</td>
-                <td class="text-end fw-medium">Rp 46.000</td>
-                <td class="text-center"><span class="badge bg-light text-secondary border rounded-pill">Tunai</span></td>
-              </tr>
+            <tbody id="transactionTableBody">
+              <tr><td colspan="8" class="text-center text-muted py-4">Memuat transaksi...</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center px-4 py-3 border-top">
+          <span class="text-muted small" id="txPaginationInfo"></span>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-light border" id="btnPrevPage" disabled><i class="bi bi-chevron-left"></i></button>
+            <button class="btn btn-sm btn-light border" id="btnNextPage" disabled><i class="bi bi-chevron-right"></i></button>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Modal Detail Order -->
+  <div class="modal fade" id="orderDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow border-0">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="orderDetailCode">Detail Transaksi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="orderDetailBody"></div>
+        <div class="modal-footer gap-2" id="orderDetailActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body fw-medium" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Sidebar Toggle Logic
-    document.getElementById('sidebarToggle').addEventListener('click', function() {
+    const API = 'http://127.0.0.1:3001/api';
+    const getToken = () => localStorage.getItem('kg_token');
+    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+    function authHeaders() { return { 'Content-Type':'application/json','Authorization':'Bearer '+getToken() }; }
+
+    function showToast(msg, type='success') {
+      const el = document.getElementById('toast');
+      el.className = `toast align-items-center text-white border-0 bg-${type}`;
+      document.getElementById('toastMsg').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(el,{delay:3000}).show();
+    }
+
+    async function apiFetch(path, opts={}) {
+      const res = await fetch(API+path,{headers:authHeaders(),...opts});
+      if (res.status===401) { localStorage.clear(); location.href='../login.html'; return null; }
+      return res.json();
+    }
+
+    function formatRp(n) { return 'Rp '+Number(n).toLocaleString('id-ID'); }
+
+    // ── Auth ─────────────────────────────────────────────────────────────
+    const user = getUser();
+    if (!getToken()||user.role!=='owner') { location.href='../login.html'; }
+    document.getElementById('navName').textContent   = user.full_name||'Owner';
+    document.getElementById('navAvatar').textContent = (user.full_name||'OW').substring(0,2).toUpperCase();
+    document.getElementById('btnLogout').addEventListener('click',()=>{ localStorage.clear(); location.href='../login.html'; });
+
+    document.getElementById('sidebarToggle').addEventListener('click',()=>{
       document.getElementById('sidebar').classList.toggle('show');
       document.getElementById('sidebarOverlay').classList.toggle('show');
     });
-    
-    document.getElementById('sidebarOverlay').addEventListener('click', function() {
+    document.getElementById('sidebarOverlay').addEventListener('click',()=>{
       document.getElementById('sidebar').classList.remove('show');
       document.getElementById('sidebarOverlay').classList.remove('show');
     });
 
-    // Revenue Chart Initialization
-    const ctx = document.getElementById('revenueChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-            datasets: [{
-                label: 'Omzet Penjualan (Rp)',
-                data: [1200000, 1900000, 1500000, 2500000, 2200000, 3000000, 2800000],
-                borderColor: '#0d6efd',
-                backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                tension: 0.4,
-                fill: true,
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 2,
-                pointRadius: 5
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: { beginAtZero: true, grid: { drawBorder: false } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
+    // ── Filter & Tahun ────────────────────────────────────────────────────
+    const now = new Date();
+    const yearSel = document.getElementById('filterYear');
+    for (let y=now.getFullYear(); y>=now.getFullYear()-3; y--) {
+      const o=document.createElement('option'); o.value=y; o.textContent=y; yearSel.appendChild(o);
+    }
+    document.getElementById('filterMonth').value = now.getMonth()+1;
+
+    document.getElementById('btnLoad').addEventListener('click', loadAll);
+
+    function getMonthYear() {
+      return {
+        month: document.getElementById('filterMonth').value,
+        year:  document.getElementById('filterYear').value,
+      };
+    }
+
+    // ── Load All ──────────────────────────────────────────────────────────
+    async function loadAll() {
+      const {month,year} = getMonthYear();
+      const monthName = document.getElementById('filterMonth').options[month-1].text;
+      document.getElementById('periodeLabel').textContent = `Periode: ${monthName} ${year}`;
+      await Promise.all([loadSummary(month, year), loadTopProducts(month, year), loadTransactions()]);
+    }
+
+    // ── Ringkasan ─────────────────────────────────────────────────────────
+    async function loadSummary(month, year) {
+      const data = await apiFetch(`/reports/monthly?month=${month}&year=${year}`);
+      if (!data?.data) return;
+      const r = data.data.ringkasan;
+      document.getElementById('statOmzet').textContent     = formatRp(r.total_omzet);
+      document.getElementById('statTransaksi').textContent = r.jumlah_transaksi;
+      document.getElementById('statLunas').textContent     = r.transaksi_lunas;
+      document.getElementById('statBatal').textContent     = r.transaksi_batal;
+    }
+
+    // ── Produk Terlaris ───────────────────────────────────────────────────
+    async function loadTopProducts(month, year) {
+      const data = await apiFetch(`/reports/monthly?month=${month}&year=${year}`);
+      const topEl = document.getElementById('topProductsContainer');
+      const products = data?.data?.produk_terlaris || [];
+      if (!products.length) {
+        topEl.innerHTML = '<p class="text-muted text-center py-3">Belum ada data penjualan bulan ini</p>';
+        return;
+      }
+      topEl.innerHTML = `
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead class="table-light">
+              <tr><th>Nama Produk</th><th class="text-center">Terjual</th><th class="text-end">Pendapatan</th></tr>
+            </thead>
+            <tbody>
+              ${products.slice(0,10).map((p,i)=>`
+                <tr>
+                  <td><span class="fw-medium text-muted me-2">${i+1}.</span>${p.nama_produk}</td>
+                  <td class="text-center"><span class="badge bg-success-subtle text-success rounded-pill">${p.total_terjual}</span></td>
+                  <td class="text-end fw-semibold">${formatRp(p.total_pendapatan)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
+
+    // ── Tabel Transaksi ───────────────────────────────────────────────────
+    let txPage = 1;
+    const TX_LIMIT = 20;
+    let txTotal = 0;
+
+    async function loadTransactions(page=1) {
+      txPage = page;
+      const {month, year} = getMonthYear();
+      const from  = `${year}-${String(month).padStart(2,'0')}-01`;
+      const status = document.getElementById('filterStatus').value;
+
+      let url = `/orders?limit=${TX_LIMIT}&page=${page}&from=${from}`;
+      if (status) url += `&status=${status}`;
+
+      const tbody = document.getElementById('transactionTableBody');
+      tbody.innerHTML = '<tr><td colspan="8" class="text-center py-3"><div class="spinner-border spinner-border-sm me-2"></div></td></tr>';
+
+      const data = await apiFetch(url);
+      if (!data) return;
+
+      txTotal = data.meta?.total||0;
+      const orders = data.data||[];
+
+      document.getElementById('txCountLabel').textContent = `${txTotal} transaksi ditemukan`;
+
+      if (!orders.length) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">Tidak ada transaksi</td></tr>';
+        updateTxPagination(); return;
+      }
+
+      const sMap = {paid:'success',unpaid:'warning',cancelled:'danger'};
+      tbody.innerHTML = orders.map(o => `
+        <tr>
+          <td class="fw-medium small">${o.order_code}</td>
+          <td class="text-muted small">${new Date(o.created_at).toLocaleString('id-ID')}</td>
+          <td>${o.kasir?.full_name||'-'}</td>
+          <td class="fw-bold">${formatRp(o.total)}</td>
+          <td class="text-muted">${o.discount_amount>0?formatRp(o.discount_amount):'-'}</td>
+          <td><span class="badge bg-light text-dark border rounded-pill">${o.payment_method}</span></td>
+          <td><span class="badge bg-${sMap[o.order_status]}-subtle text-${sMap[o.order_status]} rounded-pill">${o.order_status}</span></td>
+          <td>
+            <button class="btn btn-sm btn-light border" onclick="openOrderDetail(${o.id})"><i class="bi bi-eye"></i></button>
+          </td>
+        </tr>`).join('');
+
+      updateTxPagination();
+    }
+
+    function updateTxPagination() {
+      const total = Math.ceil(txTotal/TX_LIMIT);
+      document.getElementById('txPaginationInfo').textContent = `Hal. ${txPage}/${Math.max(1,total)} · ${txTotal} data`;
+      document.getElementById('btnPrevPage').disabled = txPage<=1;
+      document.getElementById('btnNextPage').disabled = txPage>=total;
+    }
+
+    document.getElementById('btnPrevPage').addEventListener('click',()=>loadTransactions(txPage-1));
+    document.getElementById('btnNextPage').addEventListener('click',()=>loadTransactions(txPage+1));
+
+    // ── Detail Order ──────────────────────────────────────────────────────
+    async function openOrderDetail(orderId) {
+      const data = await apiFetch(`/orders/${orderId}`);
+      if (!data?.data) { showToast('Gagal memuat detail','danger'); return; }
+      const o = data.data;
+      const sMap = {paid:'success',unpaid:'warning',cancelled:'danger'};
+
+      document.getElementById('orderDetailCode').textContent = o.order_code;
+      document.getElementById('orderDetailBody').innerHTML = `
+        <div class="mb-3">
+          <div class="row g-2 text-sm">
+            <div class="col-6"><span class="text-muted">Kasir:</span> <strong>${o.kasir?.full_name||'-'}</strong></div>
+            <div class="col-6"><span class="text-muted">Waktu:</span> <strong>${new Date(o.created_at).toLocaleString('id-ID')}</strong></div>
+            <div class="col-6"><span class="text-muted">Metode:</span> <strong>${o.payment_method}</strong></div>
+            <div class="col-6"><span class="text-muted">Status:</span> <span class="badge bg-${sMap[o.order_status]}-subtle text-${sMap[o.order_status]} rounded-pill">${o.order_status}</span></div>
+          </div>
+        </div>
+        <div class="table-responsive mb-3">
+          <table class="table table-sm">
+            <thead><tr><th>Produk</th><th class="text-center">Qty</th><th class="text-end">Harga</th></tr></thead>
+            <tbody>
+              ${(o.items||[]).map(it=>`<tr>
+                <td>${it.product_name_snapshot}</td>
+                <td class="text-center">${it.qty}</td>
+                <td class="text-end">${formatRp(it.line_total)}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between"><span>Subtotal</span><strong>${formatRp(o.subtotal)}</strong></div>
+        ${o.discount_amount>0?`<div class="d-flex justify-content-between text-danger"><span>Diskon</span><strong>-${formatRp(o.discount_amount)}</strong></div>`:''}
+        <div class="d-flex justify-content-between fs-5 fw-bold pt-2 border-top mt-2"><span>Total</span><span class="text-primary">${formatRp(o.total)}</span></div>`;
+
+      // Action buttons
+      const actEl = document.getElementById('orderDetailActions');
+      actEl.innerHTML = `<button class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>`;
+      if (o.order_status!=='paid') actEl.insertAdjacentHTML('beforeend',
+        `<button class="btn btn-success rounded-pill px-4" onclick="updateOrderStatus(${o.id},'paid')"><i class="bi bi-check2-circle me-1"></i>Tandai Lunas</button>`);
+      if (o.order_status!=='cancelled') actEl.insertAdjacentHTML('beforeend',
+        `<button class="btn btn-outline-danger rounded-pill px-4" onclick="updateOrderStatus(${o.id},'cancelled')"><i class="bi bi-x-circle me-1"></i>Batalkan</button>`);
+
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal')).show();
+    }
+
+    async function updateOrderStatus(orderId, status) {
+      const res = await apiFetch(`/orders/${orderId}/status`,{method:'PATCH',body:JSON.stringify({order_status:status})});
+      if (res?.status===200) {
+        showToast('Status diperbarui','success');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal')).hide();
+        loadTransactions(txPage);
+        loadSummary(getMonthYear().month, getMonthYear().year);
+      } else {
+        showToast(res?.message||'Gagal update status','danger');
+      }
+    }
+
+    // ── Export ────────────────────────────────────────────────────────────
+    function exportReport(format) {
+      const {month,year} = getMonthYear();
+      const token = getToken();
+      const url = `${API}/reports/monthly/export?month=${month}&year=${year}&format=${format}`;
+      // Buat anchor dengan auth header via fetch
+      fetch(url,{headers:authHeaders()})
+        .then(r => {
+          if (!r.ok) throw new Error('Export gagal');
+          return r.blob();
+        })
+        .then(blob => {
+          const ext = format==='csv'?'csv':'xlsx';
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `laporan-kantingo-${year}-${String(month).padStart(2,'0')}.${ext}`;
+          a.click();
+          showToast('File berhasil diunduh','success');
+        })
+        .catch(()=>showToast('Gagal mengunduh laporan','danger'));
+    }
+
+    document.getElementById('btnExportExcel').addEventListener('click',()=>exportReport('excel'));
+    document.getElementById('btnExportCSV').addEventListener('click',()=>exportReport('csv'));
+
+    loadAll();
   </script>
-  </body>
+</body>
 </html>
