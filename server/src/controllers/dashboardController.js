@@ -108,7 +108,14 @@ const kasirDashboard = async (req, res, next) => {
     const from = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
     const to = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
 
+    // NOTE: query ini menggunakan built-in Date (local time). Jika DB menyimpan created_at dalam UTC,
+    // maka filter 'hari ini' bisa bergeser. Pastikan timezone DB sesuai.
+
+
     // Omzet hari ini
+    // Catatan: filter transaksi hari ini sebaiknya konsisten dengan status lunas.
+    // Jika sistem menyimpan order sebagai 'paid' saat lunas, maka query omzet otomatis benar.
+    // Namun beberapa flow bisa mengubah 'order_status' setelah pembayaran.
     const [omzetRow] = await sequelize.query(
       `SELECT
         COALESCE(SUM(total), 0) AS omzet,
@@ -119,14 +126,17 @@ const kasirDashboard = async (req, res, next) => {
       { replacements: [from, to], type: sequelize.QueryTypes.SELECT }
     );
 
-    // Transaksi kasir ini hari ini
+
+    // Transaksi kasir ini hari ini (hitung yang sudah lunas saja agar konsisten dengan card omzet)
     const [kasirRow] = await sequelize.query(
       `SELECT COUNT(*) AS transaksi_saya
        FROM orders
        WHERE created_by_user_id = ?
+         AND order_status = 'paid'
          AND created_at BETWEEN ? AND ?`,
       { replacements: [req.user.id, from, to], type: sequelize.QueryTypes.SELECT }
     );
+
 
     // Notifikasi stok habis/menipis
     const setting = await Setting.findByPk(1);

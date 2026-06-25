@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="global.css">
 </head>
+
 <body>
 
   <!-- Top Navigation -->
@@ -29,7 +31,9 @@
           </ul>
         </div>
         <div class="d-flex gap-3 align-items-center">
-          <a href="Admin/admin-dashboard.html" id="adminLink" class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0" style="background:#1a1a2e">
+          <a href="Admin/admin-dashboard.html" id="adminLink"
+            class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0"
+            style="background:#1a1a2e">
             <i class="bi bi-shield-lock-fill text-primary"></i><span class="small fw-bold">Panel Admin</span>
           </a>
           <div class="dropdown">
@@ -41,8 +45,10 @@
                 <div class="fw-semibold small" id="navFullName"></div>
                 <div class="text-muted small" id="navRole"></div>
               </li>
-              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
-              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i
+                    class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
+              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i
+                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
             </ul>
           </div>
         </div>
@@ -57,8 +63,10 @@
         <p class="text-muted m-0">Kelola menu, harga, dan ketersediaan stok.</p>
       </div>
       <div class="d-flex gap-2 flex-wrap" id="ownerActions" style="display:none!important">
-        <button class="btn btn-outline-secondary rounded-pill px-3" id="btnExportCSV"><i class="bi bi-download me-2"></i>Export CSV</button>
-        <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#productModal" id="btnAddProduct">
+        <button class="btn btn-outline-secondary rounded-pill px-3" id="btnExportCSV"><i
+            class="bi bi-download me-2"></i>Export CSV</button>
+        <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#productModal"
+          id="btnAddProduct">
           <i class="bi bi-plus-lg me-2"></i>Tambah Produk
         </button>
       </div>
@@ -90,10 +98,12 @@
 
     <ul class="nav nav-pills nav-pills-custom mb-4" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-list" type="button">Daftar Produk</button>
+        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-list" type="button">Daftar
+          Produk</button>
       </li>
       <li class="nav-item">
-        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-log" type="button">Log Aktivitas Stok</button>
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-log" type="button">Log Aktivitas
+          Stok</button>
       </li>
     </ul>
 
@@ -114,15 +124,21 @@
                 </tr>
               </thead>
               <tbody id="productTableBody">
-                <tr><td colspan="6" class="text-center py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat produk...</td></tr>
+                <tr>
+                  <td colspan="6" class="text-center py-4">
+                    <div class="spinner-border spinner-border-sm me-2"></div>Memuat produk...
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
           <div class="d-flex justify-content-between align-items-center px-4 py-3 border-top" id="paginationBar">
             <span class="text-muted small" id="paginationInfo"></span>
             <div class="d-flex gap-2">
-              <button class="btn btn-sm btn-light border" id="btnPrevPage" disabled><i class="bi bi-chevron-left"></i></button>
-              <button class="btn btn-sm btn-light border" id="btnNextPage" disabled><i class="bi bi-chevron-right"></i></button>
+              <button class="btn btn-sm btn-light border" id="btnPrevPage" disabled><i
+                  class="bi bi-chevron-left"></i></button>
+              <button class="btn btn-sm btn-light border" id="btnNextPage" disabled><i
+                  class="bi bi-chevron-right"></i></button>
             </div>
           </div>
         </div>
@@ -133,7 +149,9 @@
         <div class="cardx p-4">
           <h5 class="fw-bold mb-4">Riwayat Perubahan Stok</h5>
           <div id="stockLogList">
-            <div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm me-2"></div>Memuat log...</div>
+            <div class="text-center text-muted py-4">
+              <div class="spinner-border spinner-border-sm me-2"></div>Memuat log...
+            </div>
           </div>
         </div>
       </div>
@@ -171,8 +189,40 @@
             </select>
           </div>
           <div class="mb-3">
-            <label class="form-label fw-semibold">URL Gambar</label>
-            <input type="url" class="form-control" id="productImage" placeholder="https://...">
+            <label class="form-label fw-semibold">Gambar Produk</label>
+            <!-- Preview -->
+            <div id="imagePreviewWrap" class="mb-2" style="display:none">
+              <img id="imagePreview" src="" alt="Preview" class="rounded border"
+                style="width:80px;height:80px;object-fit:cover;">
+              <button type="button" class="btn btn-sm btn-outline-danger ms-2 align-top" id="btnRemoveImage">
+                <i class="bi bi-x-lg"></i> Hapus
+              </button>
+            </div>
+            <!-- Tab metode -->
+            <ul class="nav nav-pills mb-2" style="gap:4px">
+              <li class="nav-item">
+                <button class="nav-link active py-1 px-3 small" id="tabUpload">
+                  <i class="bi bi-upload me-1"></i>Upload File
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link py-1 px-3 small" id="tabUrl">
+                  <i class="bi bi-link-45deg me-1"></i>URL
+                </button>
+              </li>
+            </ul>
+            <div id="inputUpload">
+              <input type="file" class="form-control" id="productImageFile"
+                accept="image/jpeg,image/png,image/webp,image/gif">
+              <div class="form-text text-muted">JPG, PNG, WEBP, GIF · Maks 2MB</div>
+              <div id="uploadProgress" class="progress mt-2" style="height:4px;display:none">
+                <div class="progress-bar progress-bar-striped progress-bar-animated w-100"></div>
+              </div>
+            </div>
+            <div id="inputUrl" style="display:none">
+              <input type="url" class="form-control" id="productImage" placeholder="https://...">
+            </div>
+            <input type="hidden" id="productImageUrl">
           </div>
           <div class="mb-3">
             <label class="form-label fw-semibold">Status</label>
@@ -181,6 +231,7 @@
               <option value="habis">Habis</option>
             </select>
           </div>
+
         </div>
         <div class="modal-footer border-0">
           <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
@@ -239,7 +290,7 @@
   <script>
     const API = 'http://127.0.0.1:3001/api';
     const getToken = () => localStorage.getItem('kg_token');
-    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+    const getUser = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
 
     function authHeaders() {
       return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
@@ -265,7 +316,7 @@
     if (!getToken()) { location.href = 'login.html'; }
     document.getElementById('navUserName').textContent = user.full_name || user.username || 'User';
     document.getElementById('navFullName').textContent = user.full_name || '-';
-    document.getElementById('navRole').textContent     = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
+    document.getElementById('navRole').textContent = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
     document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = 'login.html'; });
 
     const isOwner = user.role === 'owner';
@@ -276,7 +327,7 @@
     }
 
     // ── Pagination State ─────────────────────────────────────────────────
-    let currentPage  = 1;
+    let currentPage = 1;
     const PAGE_LIMIT = 20;
     let totalProducts = 0;
 
@@ -291,13 +342,13 @@
     // ── Load Produk ───────────────────────────────────────────────────────
     async function loadProducts(page = 1) {
       currentPage = page;
-      const q       = document.getElementById('searchProduct').value.trim();
-      const catId   = document.getElementById('filterCategory').value;
-      const status  = document.getElementById('filterStatus').value;
+      const q = document.getElementById('searchProduct').value.trim();
+      const catId = document.getElementById('filterCategory').value;
+      const status = document.getElementById('filterStatus').value;
 
       let url = `/products?limit=${PAGE_LIMIT}&page=${page}`;
-      if (q)      url += `&q=${encodeURIComponent(q)}`;
-      if (catId)  url += `&category_id=${catId}`;
+      if (q) url += `&q=${encodeURIComponent(q)}`;
+      if (catId) url += `&category_id=${catId}`;
       if (status) url += `&status=${status}`;
 
       const tbody = document.getElementById('productTableBody');
@@ -323,10 +374,14 @@
             ? `<span class="badge bg-warning-subtle text-warning rounded-pill">Sedikit (${p.stock})</span>`
             : `<span class="badge bg-success-subtle text-success rounded-pill">Aman (${p.stock})</span>`;
 
-        const imgSrc = p.image_url || 'https://via.placeholder.com/100?text=No+Img';
+        const API_URL = 'http://localhost:3001';
+
+        const imgSrc = p.image_url
+          ? `${API_URL}${p.image_url}`
+          : 'https://via.placeholder.com/100?text=No+Img';
         const ownerBtns = isOwner ? `
           <button class="btn btn-light btn-action text-secondary me-1" title="Edit" onclick="openEditProduct(${JSON.stringify(JSON.stringify(p))})"><i class="bi bi-pencil"></i></button>
-          <button class="btn btn-light btn-action text-danger" title="Hapus" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g,'&#39;')}')"><i class="bi bi-trash"></i></button>` : '';
+          <button class="btn btn-light btn-action text-danger" title="Hapus" onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, '&#39;')}')"><i class="bi bi-trash"></i></button>` : '';
 
         return `<tr>
           <td class="ps-4"><img src="${imgSrc}" class="product-thumb" alt="${p.name}" onerror="this.src='https://via.placeholder.com/100?text=No+Img'"></td>
@@ -335,10 +390,10 @@
             <span class="text-muted small">${p.category?.name || 'Tanpa Kategori'}</span>
           </td>
           <td class="fw-semibold">${formatRp(p.price)}</td>
-          <td><span class="status-dot ${isHabis ? 'bg-danger' : Number(p.stock)<=5 ? 'bg-warning' : 'bg-success'}"></span>${p.stock}</td>
+          <td><span class="status-dot ${isHabis ? 'bg-danger' : Number(p.stock) <= 5 ? 'bg-warning' : 'bg-success'}"></span>${p.stock}</td>
           <td>${stockBadge}</td>
           <td class="text-end pe-4">
-            <button class="btn btn-light btn-action text-primary me-1" title="Update Stok" onclick="openStockModal(${p.id}, '${p.name.replace(/'/g,'&#39;')}')"><i class="bi bi-plus-circle"></i></button>
+            <button class="btn btn-light btn-action text-primary me-1" title="Update Stok" onclick="openStockModal(${p.id}, '${p.name.replace(/'/g, '&#39;')}')"><i class="bi bi-plus-circle"></i></button>
             ${ownerBtns}
           </td>
         </tr>`;
@@ -349,7 +404,7 @@
 
     function updatePagination() {
       const totalPages = Math.ceil(totalProducts / PAGE_LIMIT);
-      document.getElementById('paginationInfo').textContent = `${totalProducts} produk, halaman ${currentPage} / ${Math.max(1,totalPages)}`;
+      document.getElementById('paginationInfo').textContent = `${totalProducts} produk, halaman ${currentPage} / ${Math.max(1, totalPages)}`;
       document.getElementById('btnPrevPage').disabled = currentPage <= 1;
       document.getElementById('btnNextPage').disabled = currentPage >= totalPages;
     }
@@ -365,51 +420,102 @@
     // ── Tambah / Edit Produk (Owner) ──────────────────────────────────────
     const productModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('productModal'));
 
+    // ── Image Upload Helpers ──────────────────────────────────────────────
+    const IMG_BASE = 'http://127.0.0.1:3001';
+
+    function resetImageInput(existingUrl = '') {
+      document.getElementById('productImageFile').value = '';
+      document.getElementById('productImage').value = existingUrl;
+      document.getElementById('productImageUrl').value = existingUrl;
+      setImagePreview(existingUrl);
+      switchImgTab('upload');
+    }
+
+    function setImagePreview(url) {
+      const wrap = document.getElementById('imagePreviewWrap');
+      const img = document.getElementById('imagePreview');
+      if (url) {
+        img.src = url.startsWith('http') ? url : IMG_BASE + url;
+        wrap.style.display = '';
+      } else {
+        wrap.style.display = 'none';
+        img.src = '';
+      }
+    }
+
+    function switchImgTab(method) {
+      document.getElementById('inputUpload').style.display = method === 'upload' ? '' : 'none';
+      document.getElementById('inputUrl').style.display = method === 'url' ? '' : 'none';
+      document.getElementById('tabUpload').classList.toggle('active', method === 'upload');
+      document.getElementById('tabUrl').classList.toggle('active', method === 'url');
+    }
+
+    document.getElementById('tabUpload').addEventListener('click', () => switchImgTab('upload'));
+    document.getElementById('tabUrl').addEventListener('click', () => switchImgTab('url'));
+
+    document.getElementById('productImageFile').addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('imagePreview').src = e.target.result;
+        document.getElementById('imagePreviewWrap').style.display = '';
+      };
+      reader.readAsDataURL(file);
+      document.getElementById('productImageUrl').value = '';
+    });
+
+    // ── Tambah / Edit Produk ──────────────────────────────────────────────
     document.getElementById('btnAddProduct')?.addEventListener('click', () => {
       document.getElementById('productModalTitle').textContent = 'Tambah Produk Baru';
-      document.getElementById('productId').value    = '';
-      document.getElementById('productName').value  = '';
-      document.getElementById('productPrice').value = '';
-      document.getElementById('productStock').value = '';
-      document.getElementById('productImage').value = '';
+      ['productId', 'productName', 'productPrice', 'productStock'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('productStatus').value = 'tersedia';
       document.getElementById('productCategory').value = '';
+      resetImageInput();
     });
 
     function openEditProduct(jsonStr) {
       const p = JSON.parse(jsonStr);
       document.getElementById('productModalTitle').textContent = 'Edit Produk';
-      document.getElementById('productId').value     = p.id;
-      document.getElementById('productName').value   = p.name;
-      document.getElementById('productPrice').value  = p.price;
-      document.getElementById('productStock').value  = p.stock;
-      document.getElementById('productImage').value  = p.image_url || '';
+      document.getElementById('productId').value = p.id;
+      document.getElementById('productName').value = p.name;
+      document.getElementById('productPrice').value = p.price;
+      document.getElementById('productStock').value = p.stock;
       document.getElementById('productStatus').value = p.status;
       document.getElementById('productCategory').value = p.category_id || '';
+      resetImageInput(p.image_url || '');
       productModal().show();
     }
 
     document.getElementById('btnSaveProduct').addEventListener('click', async () => {
-      const id    = document.getElementById('productId').value;
-      const name  = document.getElementById('productName').value.trim();
+      const id = document.getElementById('productId').value;
+      const name = document.getElementById('productName').value.trim();
       const price = Number(document.getElementById('productPrice').value);
       const stock = Number(document.getElementById('productStock').value);
-      const image = document.getElementById('productImage').value.trim();
       const status = document.getElementById('productStatus').value;
-      const catId  = document.getElementById('productCategory').value;
+      const catId = document.getElementById('productCategory').value;
 
       if (!name) { showToast('Nama produk wajib diisi', 'warning'); return; }
       if (isNaN(price) || price < 0) { showToast('Harga tidak valid', 'warning'); return; }
       if (stock < 0) { showToast('Stok tidak boleh negatif', 'warning'); return; }
 
-      const payload = { name, price, stock, status, image_url: image || null, category_id: catId || null };
-      const isEdit  = !!id;
-      const url     = isEdit ? `/products/${id}` : '/products';
-      const method  = isEdit ? 'PUT' : 'POST';
+      // Upload file dulu jika ada
+      const fileInput = document.getElementById('productImageFile');
+      if (fileInput.files.length > 0) {
+        const uploadedUrl = await uploadImageFile(fileInput.files[0]);
+        if (!uploadedUrl) return;
+        document.getElementById('productImageUrl').value = uploadedUrl;
+      }
 
+      const finalImage = document.getElementById('productImageUrl').value.trim();
+      const payload = { name, price, stock, status, image_url: finalImage || null, category_id: catId || null };
+      const isEdit = !!id;
       const btn = document.getElementById('btnSaveProduct');
       btn.disabled = true;
-      const res = await apiFetch(url, { method, body: JSON.stringify(payload) });
+      const res = await apiFetch(isEdit ? `/products/${id}` : '/products', {
+        method: isEdit ? 'PUT' : 'POST',
+        body: JSON.stringify(payload),
+      });
       btn.disabled = false;
 
       if (res && (res.status === 200 || res.status === 201)) {
@@ -436,19 +542,19 @@
     const stockModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('stockModal'));
 
     function openStockModal(productId, productName) {
-      document.getElementById('stockProductId').value    = productId;
+      document.getElementById('stockProductId').value = productId;
       document.getElementById('stockProductName').textContent = productName;
-      document.getElementById('stockQty').value          = '';
-      document.getElementById('stockNote').value         = '';
+      document.getElementById('stockQty').value = '';
+      document.getElementById('stockNote').value = '';
       document.getElementById('stockMovementType').value = 'in';
       stockModal().show();
     }
 
     document.getElementById('btnSaveStock').addEventListener('click', async () => {
       const productId = document.getElementById('stockProductId').value;
-      const qty       = Number(document.getElementById('stockQty').value);
-      const type      = document.getElementById('stockMovementType').value;
-      const note      = document.getElementById('stockNote').value.trim();
+      const qty = Number(document.getElementById('stockQty').value);
+      const type = document.getElementById('stockMovementType').value;
+      const note = document.getElementById('stockNote').value.trim();
 
       if (!qty || qty < 1) { showToast('Jumlah minimal 1', 'warning'); return; }
 
@@ -491,13 +597,13 @@
     document.getElementById('btnExportCSV')?.addEventListener('click', async () => {
       const data = await apiFetch('/products?limit=1000');
       if (!data?.data) return;
-      const rows = [['ID','Nama','Harga','Stok','Status','Kategori']];
+      const rows = [['ID', 'Nama', 'Harga', 'Stok', 'Status', 'Kategori']];
       data.data.forEach(p => rows.push([p.id, p.name, p.price, p.stock, p.status, p.category?.name || '']));
       const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
-      const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `produk-kantingo-${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `produk-kantingo-${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     });
 
@@ -513,4 +619,5 @@
     loadProducts();
   </script>
 </body>
+
 </html>

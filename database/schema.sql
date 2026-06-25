@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS orders (
   order_code VARCHAR(30) NOT NULL,
   created_by_user_id BIGINT UNSIGNED NULL,
   order_status ENUM('paid','unpaid','cancelled') NOT NULL DEFAULT 'paid',
-  payment_method ENUM('tunai','qris','transfer','lainnya') NOT NULL DEFAULT 'qris',
+  payment_method ENUM('tunai','qris','transfer','lainnya','hutang') NOT NULL DEFAULT 'qris',
   subtotal BIGINT NOT NULL,
   discount_amount BIGINT NOT NULL DEFAULT 0,
   total BIGINT NOT NULL,

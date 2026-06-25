@@ -90,6 +90,7 @@ const create = async (req, res, next) => {
   const t = await sequelize.transaction();
   try {
     const { payment_method = 'tunai', discount_amount = 0, items } = req.body;
+    const orderStatus = payment_method === 'hutang' ? 'unpaid' : 'paid';
 
     if (!Array.isArray(items) || items.length === 0) {
       await t.rollback();
@@ -146,7 +147,9 @@ const create = async (req, res, next) => {
       {
         order_code: orderCode,
         created_by_user_id: req.user.id,
-        order_status: 'unpaid',
+        // Jika metode hutang dipilih, order disimpan sebagai unpaid.
+        // Untuk pembayaran tunai/online, order tetap langsung paid.
+        order_status: orderStatus,
         payment_method,
         subtotal,
         discount_amount: discountNum,
@@ -154,6 +157,7 @@ const create = async (req, res, next) => {
       },
       { transaction: t }
     );
+
 
     // Insert order items & kurangi stok
     for (const { product, qty, unit_price, line_total, product_name_snapshot } of itemsToInsert) {
@@ -198,8 +202,14 @@ const create = async (req, res, next) => {
 /**
  * PATCH /api/orders/:id/status
  * Body: { order_status: 'paid' | 'unpaid' | 'cancelled' }
+ *
+ * Catatan penting:
+ * - Order dibuat awalnya dengan status `unpaid`.
+ * - Untuk memastikan omzet/rekap di dashboard masuk, transaksi yang sudah berhasil bayar
+ *   harus diubah ke `paid`.
  */
 const updateStatus = async (req, res, next) => {
+
   const t = await sequelize.transaction();
   try {
     const order = await Order.findByPk(req.params.id, {
@@ -244,9 +254,13 @@ const updateStatus = async (req, res, next) => {
       }
     }
 
+    // Untuk memastikan rekap omzet dashboard konsisten, set order_status = 'paid'
+    // setiap kali order diposting sebagai berhasil bayar.
+    // (Frontend biasanya mengirim { order_status: 'paid' } saat pembayaran sukses.)
     if (order_status) order.order_status = order_status;
     if (payment_method) order.payment_method = payment_method;
     await order.save({ transaction: t });
+
 
     await t.commit();
     return res.json({ status: 200, message: 'Status transaksi berhasil diupdate' });

@@ -14,7 +14,7 @@ const Order = sequelize.define(
       defaultValue: 'unpaid',
     },
     payment_method: {
-      type: DataTypes.ENUM('tunai', 'qris', 'transfer', 'lainnya'),
+      type: DataTypes.ENUM('tunai', 'qris', 'transfer', 'lainnya', 'hutang'),
       allowNull: false,
       defaultValue: 'tunai',
     },

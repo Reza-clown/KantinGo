@@ -54,6 +54,10 @@ const getById = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const { category_id, name, price, image_url, stock, status } = req.body;
+    // if upload used, prefer req.file
+    const imageFromUpload = req.file ? `/uploads/products/${req.file.filename}` : null;
+    const finalImageUrl = imageFromUpload || image_url || null;
+
 
     if (Number(price) < 0) {
       return res.status(400).json({ status: 400, message: 'Harga tidak boleh negatif' });
@@ -66,10 +70,11 @@ const create = async (req, res, next) => {
       category_id: category_id || null,
       name,
       price: Number(price),
-      image_url: image_url || null,
+      image_url: finalImageUrl,
       stock: Number(stock || 0),
       status: status || (Number(stock || 0) > 0 ? 'tersedia' : 'habis'),
     });
+
 
     // Log inventory jika ada stok awal
     if (Number(stock) > 0) {
@@ -102,6 +107,9 @@ const update = async (req, res, next) => {
     }
 
     const { category_id, name, price, image_url, status } = req.body;
+    const imageFromUpload = req.file ? `/uploads/products/${req.file.filename}` : null;
+    const finalImageUrl = imageFromUpload || image_url || undefined;
+
 
     if (price !== undefined && Number(price) < 0) {
       await t.rollback();
@@ -111,7 +119,8 @@ const update = async (req, res, next) => {
     if (category_id !== undefined) product.category_id = category_id;
     if (name !== undefined) product.name = name;
     if (price !== undefined) product.price = Number(price);
-    if (image_url !== undefined) product.image_url = image_url;
+    if (finalImageUrl !== undefined) product.image_url = finalImageUrl;
+
     if (status !== undefined) product.status = status;
 
     await product.save({ transaction: t });

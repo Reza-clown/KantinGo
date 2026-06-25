@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +12,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="global.css">
   <style>
-    .product-card { cursor:pointer; transition:.15s; }
-    .product-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
-    .product-card.out-of-stock { opacity:.55; pointer-events:none; }
-    .cart-item-row { border-bottom:1px solid #f0f0f0; padding:.6rem 0; }
-    .qty-btn { width:28px; height:28px; padding:0; display:inline-flex; align-items:center; justify-content:center; }
-    #cartPanel { position:sticky; top:80px; }
+    .product-card {
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
+    }
+
+    .product-card.out-of-stock {
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .cart-item-row {
+      border-bottom: 1px solid #f0f0f0;
+      padding: .6rem 0;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #cartPanel {
+      position: sticky;
+      top: 80px;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Top Navigation -->
@@ -37,7 +66,9 @@
           </ul>
         </div>
         <div class="d-flex gap-3 align-items-center">
-          <a href="Admin/admin-dashboard.html" id="adminLink" class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0" style="background:#1a1a2e">
+          <a href="Admin/admin-dashboard.html" id="adminLink"
+            class="btn btn-dark rounded-pill px-4 d-none align-items-center gap-2 shadow-sm border-0"
+            style="background:#1a1a2e">
             <i class="bi bi-shield-lock-fill text-primary"></i><span class="small fw-bold">Panel Admin</span>
           </a>
           <div class="dropdown">
@@ -49,8 +80,10 @@
                 <div class="fw-semibold small" id="navFullName"></div>
                 <div class="text-muted small" id="navRole"></div>
               </li>
-              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
-              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              <li><a class="dropdown-item" href="Admin/admin-dashboard.html" id="adminMenuItem" style="display:none"><i
+                    class="bi bi-shield-lock me-2"></i>Panel Admin</a></li>
+              <li><a class="dropdown-item text-danger" href="#" id="btnLogout"><i
+                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
             </ul>
           </div>
         </div>
@@ -77,7 +110,8 @@
         <!-- Produk Cards -->
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3" id="productGrid">
           <div class="col-12 text-center text-muted py-5">
-            <div class="spinner-border"></div><div class="mt-2">Memuat produk...</div>
+            <div class="spinner-border"></div>
+            <div class="mt-2">Memuat produk...</div>
           </div>
         </div>
       </div>
@@ -105,6 +139,7 @@
                 <option value="qris">QRIS</option>
                 <option value="transfer">Transfer</option>
                 <option value="lainnya">Lainnya</option>
+                <option value="hutang">Hutang</option>
               </select>
             </div>
             <div class="d-flex justify-content-between my-3">
@@ -161,7 +196,8 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow-lg">
         <div class="modal-header border-0 pb-0">
-          <h5 class="modal-title fw-bold text-success"><i class="bi bi-check-circle-fill me-2"></i>Transaksi Berhasil!</h5>
+          <h5 class="modal-title fw-bold text-success"><i class="bi bi-check-circle-fill me-2"></i>Transaksi Berhasil!
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="receiptBody"></div>
@@ -196,7 +232,9 @@
                 </tr>
               </thead>
               <tbody id="historyBody">
-                <tr><td colspan="6" class="text-center py-3 text-muted">Memuat...</td></tr>
+                <tr>
+                  <td colspan="6" class="text-center py-3 text-muted">Memuat...</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -219,7 +257,7 @@
   <script>
     const API = 'http://127.0.0.1:3001/api';
     const getToken = () => localStorage.getItem('kg_token');
-    const getUser  = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
+    const getUser = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
 
     function authHeaders() {
       return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
@@ -245,7 +283,7 @@
     if (!getToken()) { location.href = 'login.html'; }
     document.getElementById('navUserName').textContent = user.full_name || user.username || 'Kasir';
     document.getElementById('navFullName').textContent = user.full_name || '-';
-    document.getElementById('navRole').textContent     = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
+    document.getElementById('navRole').textContent = user.role === 'owner' ? '👑 Owner' : '🧾 Kasir';
     document.getElementById('btnLogout').addEventListener('click', () => { localStorage.clear(); location.href = 'login.html'; });
     if (user.role === 'owner') {
       document.getElementById('adminLink').classList.replace('d-none', 'd-flex');
@@ -287,11 +325,11 @@
     }
 
     function renderProducts() {
-      const q   = document.getElementById('searchProduct').value.toLowerCase();
+      const q = document.getElementById('searchProduct').value.toLowerCase();
       const grid = document.getElementById('productGrid');
 
       let filtered = allProducts.filter(p => {
-        const matchQ   = !q || p.name.toLowerCase().includes(q);
+        const matchQ = !q || p.name.toLowerCase().includes(q);
         const matchCat = !activeCat || String(p.category_id) === String(activeCat);
         return matchQ && matchCat;
       });
@@ -309,8 +347,13 @@
             ? `<span class="stock-badge bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill me-1"></i>Sisa ${p.stock}</span>`
             : `<span class="stock-badge bg-success text-white"><i class="bi bi-check-circle-fill me-1"></i>Stok: ${p.stock}</span>`;
 
-        const imgSrc = p.image_url || 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(p.name);
+        const API_URL = 'http://localhost:3001';
 
+        const imgSrc = p.image_url
+          ? (p.image_url.startsWith('http')
+            ? p.image_url
+            : `${API_URL}${p.image_url}`)
+          : 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(p.name);
         return `
           <div class="col">
             <div class="product-card ${isOut ? 'out-of-stock' : ''}" onclick="addToCart(${p.id})">
@@ -374,9 +417,9 @@
     }
 
     function renderCart() {
-      const cartItemsEl  = document.getElementById('cartItems');
-      const cartEmptyEl  = document.getElementById('cartEmpty');
-      const cartSummaryEl= document.getElementById('cartSummary');
+      const cartItemsEl = document.getElementById('cartItems');
+      const cartEmptyEl = document.getElementById('cartEmpty');
+      const cartSummaryEl = document.getElementById('cartSummary');
 
       if (cart.length === 0) {
         cartItemsEl.innerHTML = '';
@@ -405,10 +448,10 @@
           <button class="btn btn-sm text-danger p-0 ms-1" onclick="removeFromCart(${c.product.id})"><i class="bi bi-x-lg"></i></button>
         </div>`).join('');
 
-      const sub   = calcSubtotal();
+      const sub = calcSubtotal();
       const total = calcTotal();
       document.getElementById('subtotalDisplay').textContent = formatRp(sub);
-      document.getElementById('totalDisplay').textContent    = formatRp(total);
+      document.getElementById('totalDisplay').textContent = formatRp(total);
 
       // Mobile bar
       const totalItems = cart.reduce((s, c) => s + c.qty, 0);
@@ -423,8 +466,8 @@
     function openCheckout() {
       if (cart.length === 0) { showToast('Keranjang masih kosong', 'warning'); return; }
       const method = document.getElementById('paymentMethod').value;
-      const disc   = Number(document.getElementById('discountInput').value) || 0;
-      const body   = document.getElementById('checkoutSummaryBody');
+      const disc = Number(document.getElementById('discountInput').value) || 0;
+      const body = document.getElementById('checkoutSummaryBody');
       body.innerHTML = `
         <div class="table-responsive mb-3">
           <table class="table table-sm">
@@ -443,7 +486,11 @@
         <div class="d-flex justify-content-between fs-5 fw-bold mt-2 pt-2 border-top">
           <span>Total</span><span class="text-primary">${formatRp(calcTotal())}</span>
         </div>
-        <div class="mt-3 p-2 bg-light rounded"><span class="text-muted small">Metode:</span> <strong>${method.toUpperCase()}</strong></div>`;
+        <div class="mt-3 p-2 bg-light rounded"><span class="text-muted small">Metode:</span> <strong>${method === 'hutang' ? 'Hutang' : method.toUpperCase()}</strong></div>`;
+      const btnConfirm = document.getElementById('btnConfirmCheckout');
+      btnConfirm.innerHTML = method === 'hutang'
+        ? '<i class="bi bi-wallet2 me-1"></i> Simpan Hutang'
+        : '<i class="bi bi-check2-circle me-1"></i>Bayar & Selesai';
       bootstrap.Modal.getOrCreateInstance(document.getElementById('checkoutModal')).show();
     }
 
@@ -467,7 +514,10 @@
       });
 
       btnConfirm.disabled = false;
-      btnConfirm.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Bayar & Selesai';
+      const method = document.getElementById('paymentMethod').value;
+      btnConfirm.innerHTML = method === 'hutang'
+        ? '<i class="bi bi-wallet2 me-1"></i> Simpan Hutang'
+        : '<i class="bi bi-check2-circle me-1"></i>Bayar & Selesai';
 
       if (!res) return;
 
@@ -499,17 +549,17 @@
     // ── Riwayat Transaksi ─────────────────────────────────────────────────
     async function loadHistory() {
       const today = new Date().toISOString().slice(0, 10);
-      const data  = await apiFetch(`/orders?limit=50&from=${today}`);
+      const data = await apiFetch(`/orders?limit=50&from=${today}`);
       const tbody = document.getElementById('historyBody');
       if (!data?.data?.length) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-center py-3 text-muted">Belum ada transaksi hari ini</td></tr>';
         return;
       }
-      const sMap = { paid:'success', unpaid:'warning', cancelled:'danger' };
+      const sMap = { paid: 'success', unpaid: 'warning', cancelled: 'danger' };
       tbody.innerHTML = data.data.map(o => `
         <tr>
           <td class="ps-3 fw-medium small">${o.order_code}</td>
-          <td class="small text-muted">${new Date(o.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</td>
+          <td class="small text-muted">${new Date(o.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</td>
           <td class="fw-bold">${formatRp(o.total)}</td>
           <td><span class="badge bg-light text-dark border rounded-pill">${o.payment_method}</span></td>
           <td><span class="badge bg-${sMap[o.order_status]}-subtle text-${sMap[o.order_status]} rounded-pill">${o.order_status}</span></td>
@@ -544,4 +594,5 @@
     renderCart();
   </script>
 </body>
+
 </html>

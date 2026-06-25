@@ -23,7 +23,7 @@ router.post(
     body('items.*.qty').isInt({ min: 1 }).withMessage('qty harus minimal 1'),
     body('payment_method')
       .optional()
-      .isIn(['tunai', 'qris', 'transfer', 'lainnya'])
+      .isIn(['tunai', 'qris', 'transfer', 'lainnya', 'hutang'])
       .withMessage('payment_method tidak valid'),
     body('discount_amount').optional().isInt({ min: 0 }).withMessage('Diskon tidak boleh negatif'),
   ],
@@ -41,7 +41,7 @@ router.patch(
       .withMessage('Status tidak valid'),
     body('payment_method')
       .optional()
-      .isIn(['tunai', 'qris', 'transfer', 'lainnya'])
+      .isIn(['tunai', 'qris', 'transfer', 'lainnya', 'hutang'])
       .withMessage('Metode bayar tidak valid'),
   ],
   handleValidation,
