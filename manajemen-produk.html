@@ -288,7 +288,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const API = 'http://127.0.0.1:3001/api';
+const API = location.origin + '/api';
     const getToken = () => localStorage.getItem('kg_token');
     const getUser = () => JSON.parse(localStorage.getItem('kg_user') || '{}');
 
@@ -374,7 +374,7 @@
             ? `<span class="badge bg-warning-subtle text-warning rounded-pill">Sedikit (${p.stock})</span>`
             : `<span class="badge bg-success-subtle text-success rounded-pill">Aman (${p.stock})</span>`;
 
-        const API_URL = 'http://localhost:3001';
+const API_URL = location.origin;
 
         const imgSrc = p.image_url
           ? `${API_URL}${p.image_url}`
@@ -421,7 +421,7 @@
     const productModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('productModal'));
 
     // ── Image Upload Helpers ──────────────────────────────────────────────
-    const IMG_BASE = 'http://127.0.0.1:3001';
+const IMG_BASE = location.origin;
 
     function resetImageInput(existingUrl = '') {
       document.getElementById('productImageFile').value = '';
