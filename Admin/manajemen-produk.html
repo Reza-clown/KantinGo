@@ -407,7 +407,7 @@
           <td>${stkBadge}</td>
           <td class="text-end pe-4">
             <button class="btn btn-sm btn-outline-primary btn-action me-1" title="Tambah Stok" onclick="openStockModal(${p.id},'${p.name.replace(/'/g, "&#39;")}')"><i class="bi bi-plus-circle"></i></button>
-            <button class="btn btn-sm btn-outline-secondary btn-action me-1" title="Edit" onclick="openEditProduct(${JSON.stringify(JSON.stringify(p))})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-light btn-action text-secondary me-1 btn-edit" title="Edit" data-id="${p.id}"><i class="bi bi-pencil"></i></button>
             <button class="btn btn-sm btn-outline-danger btn-action" title="Hapus" onclick="deleteProduct(${p.id},'${p.name.replace(/'/g, "&#39;")}')"><i class="bi bi-trash"></i></button>
           </td>
         </tr>`;
@@ -441,7 +441,24 @@
     });
 
     function openEditProduct(jsonStr) {
-      const p = JSON.parse(jsonStr);
+const p = JSON.parse(jsonStr); // jsonStr harus JSON string biasa (bukan double-stringify)
+      document.getElementById('productModalTitle').textContent = 'Edit Produk';
+      document.getElementById('productId').value = p.id;
+      document.getElementById('productName').value = p.name;
+      document.getElementById('productPrice').value = p.price;
+      document.getElementById('productStock').value = p.stock;
+      document.getElementById('productStatus').value = p.status;
+      document.getElementById('productCategory').value = p.category_id || '';
+      resetImageInput(p.image_url || '');
+      productModalEl().show();
+    }
+
+    async function openEditProductById(id) {
+      console.log('openEditProductById', id);
+      const data = await apiFetch(`/products/${id}`);
+      console.log('openEditProductById res', data);
+      if (!data?.data) { showToast('Gagal memuat produk','danger'); return; }
+      const p = data.data;
       document.getElementById('productModalTitle').textContent = 'Edit Produk';
       document.getElementById('productId').value = p.id;
       document.getElementById('productName').value = p.name;
@@ -688,6 +705,14 @@
     // ── Init ──────────────────────────────────────────────────────────────
     loadCategories();
     loadProducts();
+
+    // Event delegation for Edit buttons (robust against dynamic rows)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest && e.target.closest('.btn-edit');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      if (id) openEditProductById(Number(id));
+    });
   </script>
 </body>
 

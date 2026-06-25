@@ -331,9 +331,11 @@
       const {month, year} = getMonthYear();
       const from  = `${year}-${String(month).padStart(2,'0')}-01`;
       const status = document.getElementById('filterStatus').value;
+      const payment = document.getElementById('filterPayment').value;
 
       let url = `/orders?limit=${TX_LIMIT}&page=${page}&from=${from}`;
       if (status) url += `&status=${status}`;
+      if (payment) url += `&payment_method=${payment}`;
 
       const tbody = document.getElementById('transactionTableBody');
       tbody.innerHTML = '<tr><td colspan="8" class="text-center py-3"><div class="spinner-border spinner-border-sm me-2"></div></td></tr>';
@@ -432,6 +434,18 @@
         loadSummary(getMonthYear().month, getMonthYear().year);
       } else {
         showToast(res?.message||'Gagal update status','danger');
+      }
+    }
+
+    async function deleteOrder(orderId) {
+      if (!confirm('Hapus transaksi ini?')) return;
+      const res = await apiFetch(`/orders/${orderId}`,{method:'DELETE'});
+      if (res?.status===200) {
+        showToast('Transaksi dihapus','success');
+        loadTransactions(txPage);
+        loadSummary(getMonthYear().month, getMonthYear().year);
+      } else {
+        showToast(res?.message||'Gagal menghapus transaksi','danger');
       }
     }
 

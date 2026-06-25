@@ -16,10 +16,11 @@ const generateOrderCode = () => {
 /** GET /api/orders */
 const getAll = async (req, res, next) => {
   try {
-    const { status, from, to, limit = 50, page = 1 } = req.query;
+    const { status, payment_method, from, to, limit = 50, page = 1 } = req.query;
     const where = {};
 
     if (status) where.order_status = status;
+    if (payment_method) where.payment_method = payment_method;
     if (from || to) {
       const { Op } = require('sequelize');
       where.created_at = {};
