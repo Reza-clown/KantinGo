@@ -1,9 +1,11 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/dashboard.html" },
-    { "source": "/api/(.*)", "destination": "https://kantin-go.vercel.app/api/$1" }
 
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/src/index.js"
+    }
   ]
 }
-
 
